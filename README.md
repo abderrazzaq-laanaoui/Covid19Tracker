@@ -1,4 +1,4 @@
-# Covid19Track
+# Covid19Track :chart_with_upwards_trend:
 
 ### Covid19track est le projet d'un atelier de programmation .NET avec language C#
 
