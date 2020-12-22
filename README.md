@@ -14,10 +14,12 @@ La réalisation de ce projet est répartie sur 5 étapes, chaque étape est repr
 ## 1. L'implementation de la Diagramme de Classes
 ### Sous la branche : # ClassDiagram
 
-
+![GitHub Logo](/assets/DC.png)
 
 ## 2. L'implementation de la Diagramme état transition
 ### Sous la branche : # StateDiagram
+
+![GitHub Logo](/assets/DET.png)
 
 
 
