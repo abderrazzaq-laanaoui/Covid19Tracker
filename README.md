@@ -26,6 +26,8 @@ La réalisation de ce projet est répartie sur 5 étapes, chaque étape est repr
 ## 3. L'introduction d'une interface console
 ### Sous la branche : # ConsoleInterface
 
+![Diagramme état transition](/assets/Console.png)
+
 
 
 ## 4. La Laison Avec Un Source De Données
