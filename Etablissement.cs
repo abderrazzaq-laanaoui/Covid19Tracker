@@ -12,7 +12,5 @@ namespace Covid19Track
 
         protected abstract void EnvoyerDonnees(Citoyen citoyen, bool resultat);
         public override abstract string ToString();
-
-
     }
 }

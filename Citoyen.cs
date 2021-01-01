@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Covid19Track
 {
@@ -16,7 +17,7 @@ namespace Covid19Track
         Soupconne,
         Infecte,
         Vaccine,
-        Deces
+        Decede
     }
 
     public class Citoyen
@@ -32,11 +33,46 @@ namespace Covid19Track
         private List<Test> Tests;
         private List<Record> Records;
 
+        //ctor
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance)
+        {
+            this.CIN = cin;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            this.Etat = Etats.Inconnu;
+            DosesInjectee = 0;
+        }
+
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat)
+        {
+            this.CIN = cin;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            this.Etat = etat;
+        }
 
         //return l'etat d'un citoyen sous forme d'une chaine des caracteres
-        public int ConsultationEtat()
+        public string ConsultationEtat()
         {
-            throw new NotImplementedException();
+            switch (Etat)
+            {
+                case Etats.Inconnu:
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est d'etat Inconnu";
+                case Etats.Saint:
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + "  est Saint";
+                case Etats.Soupconne:
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est Soupçonné d'etre infercté";
+                case Etats.Infecte:
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est Infecté";
+                case Etats.Vaccine:
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est vacciné";
+                case Etats.Decede:
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est Décédé";
+                default:
+                    return null;
+            }
         }
 
         //les operations a effectuer si un citoyen infecté rencotre un autre citoyen
