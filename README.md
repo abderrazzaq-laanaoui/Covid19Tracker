@@ -2,7 +2,7 @@
 
 ### Covid19track est le projet d'un atelier de programmation .NET avec language C#
 
-Covid19track est une application qui permet le suivi de l'évolution d'états des citoyens marocains pendant la pandémie de Corona.
+Covid19track est une application pour simuler un système d'information qui va de permettre aux autorités sanitaires d’assurer le suivi et le contrôle de la propagation de la pandémie covid 19.
 
 La réalisation de ce projet est répartie sur 5 étapes, chaque étape est représenté par une branche et le résultat final sera dans la branche main.
 
