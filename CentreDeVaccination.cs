@@ -5,17 +5,25 @@
 
 using System;
 
-public class CentreDeVaccination : Etablissement
+namespace Covid19Track
 {
-    public override void EnvoyerDonnees()
+    public class CentreDeVaccination : Etablissement
     {
-        throw new NotImplementedException();
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InjecteDose(Citoyen citoyen)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void EnvoyerDonnees(Citoyen citoyen, bool vacciner)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
-
-    public void Vaccination()
-   {
-      throw new NotImplementedException();
-   }
-
-   
 }

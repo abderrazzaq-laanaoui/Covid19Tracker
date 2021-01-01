@@ -3,14 +3,16 @@
 // Created: 03 December 2020 14:01:14
 // Purpose: Definition of Class Etablissement
 
-using System;
-
-public abstract class Etablissement
+namespace Covid19Track
 {
-   private string nom;
-   private string reference;
+    public abstract class Etablissement
+    {
+        protected string nom;
+        public string reference { get; set; }
 
-    public abstract void EnvoyerDonnees();
+        protected abstract void EnvoyerDonnees(Citoyen citoyen, bool resultat);
+        public override abstract string ToString();
 
 
+    }
 }
