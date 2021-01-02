@@ -5,11 +5,12 @@
 
 using System;
 
-public class MinistereDeLaSante
+namespace Covid19Track { 
+public static class MinistereDeLaSante
 {
-   public void ChangerEtatCitoyen()
+   public static void ChangerEtatCitoyen(Citoyen citoyen, Etats etat )
    {
-      throw new NotImplementedException();
+            citoyen.Etat = etat;
    }
 
-}
+}}

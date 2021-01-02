@@ -24,12 +24,12 @@ namespace Covid19Track
     {
         //attributes
         public string CIN { get; }
-        private string nom;
-        private String prenom;
-        private DateTime dateDeNaissance;
+        public string nom;
+        public String prenom;
+        public DateTime dateDeNaissance;
         public Etats Etat { get; set; }
         public byte DosesInjectee { get; set; }
-        //-----//
+        // ---------------------------------------------------------------------- //
         private List<Test> Tests;
         private List<Record> Records;
 
@@ -82,8 +82,8 @@ namespace Covid19Track
 
         }
 
-
         //les operations a effectuer si un citoyen infecté rencotre un autre citoyen
+        //Enregestrer dans un DB les rencontres d'une semaines
         public void Rencontrer(Citoyen citoyen)
         {
             throw new NotImplementedException();
