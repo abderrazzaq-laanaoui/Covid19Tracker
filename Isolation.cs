@@ -5,7 +5,7 @@
 
 using System;
 
-public class Confinement
+public class Isolation
 {
    private DateTime dateDebut;
    private DateTime dateFin;

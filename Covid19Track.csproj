@@ -43,13 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Citoyen.cs" />
-    <Compile Include="Confinement.cs" />
+    <Compile Include="Isolation.cs" />
     <Compile Include="MinistereDeLaSante.cs" />
     <Compile Include="Laboratoire.cs" />
     <Compile Include="CentreDeVaccination.cs" />
     <Compile Include="Etablissement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Record.cs" />
+    <Compile Include="Rencontre.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

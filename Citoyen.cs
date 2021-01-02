@@ -29,7 +29,7 @@ namespace Covid19Track
         public DateTime dateDeNaissance;
         public Etats Etat { get; set; }
         public byte DosesInjectee { get; set; }
-        // ---------------------------------------------------------------------- //
+        // -------------------------------------------- //
         private List<Test> Tests;
         private List<Record> Records;
 
@@ -75,16 +75,15 @@ namespace Covid19Track
             }
         }
 
-        //les operations a effectuer si un citoyen infecté rencotre un autre citoyen
+        //les operation a faire si un citoyen a été isolé
         public void SeConfiner()
         {
-            throw new NotImplementedException();
 
         }
 
         //les operations a effectuer si un citoyen infecté rencotre un autre citoyen
         //Enregestrer dans un DB les rencontres d'une semaines
-        public void Rencontrer(Citoyen citoyen)
+        public void Contacter(Citoyen citoyen)
         {
             throw new NotImplementedException();
         }
