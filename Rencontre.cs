@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Covid19Track
 {
-    class Rencontre
+    public class Rencontre
     {
-        private Citoyen c1;
-        private Citoyen c2;
-        private DateTime date;
+        public Citoyen c1 { get; }
+        public Citoyen c2 { get; }
+        public DateTime date { get; }
+
+        public Rencontre(Citoyen citoyen1, Citoyen citoyen2)
+        {
+            c1 = citoyen1;
+            c2 = citoyen2;
+            date = DateTime.Now;
+
+            citoyen2.Rencontres.Add(this);
+        }
+
     }
 }

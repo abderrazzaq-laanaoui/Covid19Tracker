@@ -32,6 +32,7 @@ namespace Covid19Track
         // -------------------------------------------- //
         private List<Test> Tests;
         private List<Record> Records;
+        public List<Rencontre> Rencontres { get; set; }
 
         //ctor
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance)
@@ -85,7 +86,7 @@ namespace Covid19Track
         //Enregestrer dans un DB les rencontres d'une semaines
         public void Contacter(Citoyen citoyen)
         {
-            throw new NotImplementedException();
+            Rencontres.Add(new Rencontre(this, citoyen));
         }
     }
 }
