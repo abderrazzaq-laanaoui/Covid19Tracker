@@ -20,9 +20,19 @@ namespace Covid19Track
             return "Laboratoire " + nom + " est sous le reference: " + reference;
         }
 
-        protected override void EnvoyerDonnees(Citoyen citoyen, bool resultat)
+        public bool TestPCR(Citoyen citoyen)
         {
-            throw new NotImplementedException();
+            Random random = new Random();
+            var tmp = random.NextDouble();
+            //Taux de positivité : 10%
+            bool resultat = tmp >= 0.9;
+            EnvoyerDonnees(citoyen, resultat);
+            return resultat;
+        }
+
+        protected override void EnvoyerDonnees(Citoyen citoyen, bool resultat)
+        { 
+
         }
 
     }

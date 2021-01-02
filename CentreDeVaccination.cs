@@ -5,6 +5,7 @@
 
 namespace Covid19Track
 {
+    // date de vaccination est calculable ( => DURÉE DE PROTECTION ) 
     public class CentreDeVaccination : Etablissement
     {
         public CentreDeVaccination(string reference, string nom)
@@ -20,6 +21,7 @@ namespace Covid19Track
 
         public void InjecteDose(Citoyen citoyen)
         {
+            //si le citoyen a injecté 2 doses de vaccine il devient vaccinée
             bool res = (++citoyen.DosesInjectee >= 2);
             EnvoyerDonnees(citoyen, res);
         }

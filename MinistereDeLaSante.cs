@@ -11,6 +11,7 @@ public static class MinistereDeLaSante
    public static void ChangerEtatCitoyen(Citoyen citoyen, Etats etat )
    {
             citoyen.Etat = etat;
+            Record record = new Record(citoyen, DateTime.Now, etat);
    }
 
 }}

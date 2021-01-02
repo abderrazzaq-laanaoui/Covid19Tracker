@@ -11,5 +11,13 @@ namespace Covid19Track
     {
         private DateTime date;
         private Etats etat;
+        private Citoyen citoyen;
+
+        public Record(Citoyen citoyen, DateTime date, Etats etat)
+        {
+            this.citoyen = citoyen;
+            this.date = date;
+            this.etat = etat;
+        }
     }
 }
