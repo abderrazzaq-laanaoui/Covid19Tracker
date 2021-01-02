@@ -12,6 +12,13 @@ namespace Covid19Track
         private DateTime date;
         private bool resultat;
         private String laboratoire;
+
+        public Test(String labo, bool resultat)
+        {
+            laboratoire = labo;
+            this.resultat = resultat;
+            this.date = DateTime.Now;
+        }
     }
 
 }

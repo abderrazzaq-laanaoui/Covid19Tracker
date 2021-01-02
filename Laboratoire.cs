@@ -27,11 +27,21 @@ namespace Covid19Track
             //Taux de positivité : 10%
             bool resultat = tmp >= 0.9;
             EnvoyerDonnees(citoyen, resultat);
+            //Sauvgarder le test
+            citoyen.Tests.Add(new Test(this.reference, resultat));
             return resultat;
         }
 
         protected override void EnvoyerDonnees(Citoyen citoyen, bool resultat)
-        { 
+        {
+            if (resultat)
+            {
+                MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Infecte);
+            }
+            else
+            {
+                MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Saint);
+            }
 
         }
 

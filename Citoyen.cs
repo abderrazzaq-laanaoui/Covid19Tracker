@@ -30,7 +30,7 @@ namespace Covid19Track
         public Etats Etat { get; set; }
         public byte DosesInjectee { get; set; }
         // -------------------------------------------- //
-        private List<Test> Tests;
+        public List<Test> Tests;
         private List<Record> Records;
         public List<Rencontre> Rencontres { get; set; }
 
