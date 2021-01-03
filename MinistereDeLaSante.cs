@@ -28,9 +28,9 @@ namespace Covid19Track
 
             foreach (Rencontre rencontre in citoyen.Rencontres.Where(r => r.date >= DateTime.Now.AddDays(-7)))
             {
-                if(rencontre.c2.Etat == Etats.Inconnu || rencontre.c2.Etat == Etats.Saint)
+                if(rencontre.citoyen.Etat == Etats.Inconnu || rencontre.citoyen.Etat == Etats.Saint)
                 {
-                    rencontre.c2.Etat = Etats.Soupconne;
+                    rencontre.citoyen.Etat = Etats.Soupconne;
                 }
 
             }
