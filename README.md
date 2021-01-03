@@ -4,20 +4,19 @@
 
 Covid19track est une application pour simuler un système d'information qui va de permettre aux autorités sanitaires d’assurer le suivi et le contrôle de la propagation de la pandémie covid 19.
 
-La réalisation de ce projet est répartie sur 5 étapes, chaque étape est représenté par une branche et le résultat final sera dans la branche main.
-
+La réalisation de ce projet est répartie sur 5 étapes.
 
 
 
 #### Les etapes sont :
 
 ## 1. L'implementation de la Diagramme de Classes
-### Sous la branche : # [ClassDiagram](https://github.com/abderrazzaq-laanoui/Covid19Track/tree/ClassDiagram)
+### Sous la branche : # [main](https://github.com/abderrazzaq-laanoui/Covid19Track/tree/main)
 
 ![Diagramme de Classes](/assets/DC.png)
 
 ## 2. L'implementation de la Diagramme état transition
-### Sous la branche : # [StateDiagram](https://github.com/abderrazzaq-laanoui/Covid19Track/tree/StateDiagram)
+### Sous la branche : # [main](https://github.com/abderrazzaq-laanoui/Covid19Track/tree/main)
 
 ![Diagramme état transition](/assets/DET.png)
 
