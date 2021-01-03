@@ -44,6 +44,5 @@ namespace Covid19Track
             }
 
         }
-
     }
 }
