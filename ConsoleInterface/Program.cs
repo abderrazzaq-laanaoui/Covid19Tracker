@@ -279,6 +279,7 @@ namespace ConsoleInterface
                 Console.WriteLine("Il y'a deja un citoyen avec meme CNI!");
 
         }
+        
         private static void AddLabo()
         {
             Console.Write("Entrer le reference de Labo: ");
@@ -294,6 +295,7 @@ namespace ConsoleInterface
 
 
         }
+        
         private static void AddCentre()
         {
             Console.Write("Entrer le reference de Centre: ");
