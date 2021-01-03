@@ -1,5 +1,5 @@
 // File:    Confinement.cs
-// Author:  ABDO
+// Author:  ABDERRAZZAQ LAANOUI
 // Created: 31 December 2020 03:53:52
 // Purpose: Definition of Class Confinement
 
@@ -10,4 +10,9 @@ public class Isolation
    private DateTime dateDebut;
    private DateTime dateFin;
 
+    public Isolation(DateTime dateDebut, DateTime dateFin)
+    {
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+    }
 }

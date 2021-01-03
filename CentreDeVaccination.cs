@@ -5,7 +5,7 @@
 
 namespace Covid19Track
 {
-    // date de vaccination est calculable ( => DURÉE DE PROTECTION ) 
+    // date de vaccination est calculable (DURÉE DE PROTECTION ) => Last record vaccinee
     public class CentreDeVaccination : Etablissement
     {
         public CentreDeVaccination(string reference, string nom)

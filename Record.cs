@@ -9,8 +9,8 @@ namespace Covid19Track
 {
     public class Record
     {
-        private DateTime date;
-        private Etats etat;
+        public DateTime date { get; }
+        public Etats etat { get; }
         private Citoyen citoyen;
 
         public Record(Citoyen citoyen, DateTime date, Etats etat)
@@ -19,5 +19,7 @@ namespace Covid19Track
             this.date = date;
             this.etat = etat;
         }
+
+       
     }
 }

@@ -11,7 +11,7 @@ namespace Covid19Track
     {
         private DateTime date;
         private bool resultat;
-        private String laboratoire;
+        private string laboratoire;
 
         public Test(String labo, bool resultat)
         {

@@ -1,22 +1,40 @@
-﻿using System;
+﻿// File:    Citoyen.cs
+// Author:  ABDERRAZZAQ LAANOUI
+// Created: 03 December 2020 02:34:33
+// Purpose: Definition of Class Record
+
+
+using System;
 using System.Collections.Generic;
 
 namespace Covid19Track
 {
     public class Rencontre
     {
-        public Citoyen c1 { get; }
-        public Citoyen c2 { get; }
+
+        public Citoyen citoyen { get; }
         public DateTime date { get; }
 
-        public Rencontre(Citoyen citoyen1, Citoyen citoyen2)
+        private Rencontre( Citoyen citoyen)
         {
-            c1 = citoyen1;
-            c2 = citoyen2;
+            this.citoyen = citoyen;
             date = DateTime.Now;
-
-            citoyen2.Rencontres.Add(this);
         }
-
+        private Rencontre(Citoyen citoyen, DateTime date)
+        {
+            this.citoyen = citoyen;
+            this.date = date;
+        }
+        
+        public static void AddRencontre(Citoyen c1, Citoyen c2)
+        {
+            c1.Rencontres.Add(new Rencontre(c2));
+            c2.Rencontres.Add(new Rencontre(c1));
+        }
+        public static void AddRencontre(Citoyen c1, Citoyen c2, DateTime date)
+        {
+            c1.Rencontres.Add(new Rencontre(c2, date));
+            c2.Rencontres.Add(new Rencontre(c1, date));
+        }
     }
 }

@@ -4,6 +4,8 @@
 // Purpose: Definition of Class Citoyen
 
 using System;
+using System.Timers;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -32,6 +34,7 @@ namespace Covid19Track
         // -------------------------------------------- //
         public List<Test> Tests;
         private List<Record> Records;
+        private List<Isolation> Isolations;
         public List<Rencontre> Rencontres { get; set; }
 
         //ctor
@@ -43,6 +46,11 @@ namespace Covid19Track
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.Etat = Etats.Inconnu;
             DosesInjectee = 0;
+
+            Tests = new List<Test>();
+            Records = new List<Record>();
+            Isolations = new List<Isolation>();
+            Rencontres = new List<Rencontre>();
         }
 
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat)
@@ -52,9 +60,14 @@ namespace Covid19Track
             this.prenom = prenom;
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.Etat = etat;
+
+            Tests = new List<Test>();
+            Records = new List<Record>();
+            Isolations = new List<Isolation>();
+            Rencontres = new List<Rencontre>();
         }
 
-        //return l'etat d'un citoyen sous forme d'une chaine des caracteres
+        // Return l'etat d'un citoyen sous forme d'une chaine des caracteres
         public string ConsultationEtat()
         {
             switch (Etat)
@@ -76,17 +89,40 @@ namespace Covid19Track
             }
         }
 
-        //les operation a faire si un citoyen a été isolé
+        // Les operation a faire si un citoyen a été isolé
         public void SeConfiner()
         {
+            if(Etat == Etats.Soupconne)
+            {
+                const double interval10j = 10 * 24 *  60 * 60 * 1000; // milliseconds => 10j
 
+                Timer checkForTime = new Timer(interval10j);
+                checkForTime.Elapsed += new ElapsedEventHandler(EndConfinement);
+                checkForTime.Enabled = true;
+            }
+        }
+
+        private void EndConfinement(object sender, ElapsedEventArgs e)
+        {
+            MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Saint);
+            this.Isolations.Add(new Isolation(e.SignalTime,DateTime.Now));
         }
 
         //les operations a effectuer si un citoyen infecté rencotre un autre citoyen
         //Enregestrer dans un DB les rencontres d'une semaines
         public void Contacter(Citoyen citoyen)
         {
-            Rencontres.Add(new Rencontre(this, citoyen));
+            Rencontre.AddRencontre(this, citoyen);
+        }
+
+        public Etats GetEtat(DateTime date)
+        {
+            return Records.Last(r => r.date.Equals(date)).etat;
+        }
+        //return a peer key, value of 
+        public Dictionary<DateTime,Etats> GetEtats(DateTime dateDebut, DateTime dateFin)
+        {
+             return Records.Where(r => r.date >= dateDebut && r.date <= dateFin).ToDictionary(r => r.date , r => r.etat);
         }
     }
 }
