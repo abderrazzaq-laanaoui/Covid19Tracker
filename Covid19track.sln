@@ -4,8 +4,6 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covid19Track", "Covid19Track.csproj", "{B638E7D5-BBD7-484E-899C-72689D706CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInterface", "ConsoleInterface\ConsoleInterface.csproj", "{AE03E8D5-4503-4F7E-9244-A18DD0D05C43}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,10 +14,6 @@ Global
 		{B638E7D5-BBD7-484E-899C-72689D706CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B638E7D5-BBD7-484E-899C-72689D706CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B638E7D5-BBD7-484E-899C-72689D706CA6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE03E8D5-4503-4F7E-9244-A18DD0D05C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE03E8D5-4503-4F7E-9244-A18DD0D05C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE03E8D5-4503-4F7E-9244-A18DD0D05C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE03E8D5-4503-4F7E-9244-A18DD0D05C43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
