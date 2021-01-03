@@ -119,10 +119,22 @@ namespace Covid19Track
         {
             return Records.Last(r => r.date.Equals(date)).etat;
         }
-        //return a peer key, value of 
+        //return a peer key, value of etats in dates
         public Dictionary<DateTime,Etats> GetEtats(DateTime dateDebut, DateTime dateFin)
         {
              return Records.Where(r => r.date >= dateDebut && r.date <= dateFin).ToDictionary(r => r.date , r => r.etat);
+        }
+
+        //Rencontrer les rencontrer d'un date specific 
+        public List<Rencontre> GetRencontres(DateTime date)
+        {
+            return Rencontres.Where(r => r.date.Equals(date)).ToList();
+        }
+
+        //Rencontrer les rencoontrer dans un interval 
+        public List<Rencontre> GetRencontres(DateTime dateDebut, DateTime dateFin)
+        {
+            return Rencontres.Where(r => r.date >= dateDebut && r.date <= dateFin).ToList();
         }
     }
 }
