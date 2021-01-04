@@ -30,8 +30,9 @@ La réalisation de ce projet est répartie sur 5 étapes.
 
 
 ## 4. La Laison Avec Un Source De Données
-### Sous la branche : # [DataBase](https://github.com/abderrazzaq-laanoui/Covid19Track/tree/DataBase)
+### Sous la branche : # [DataBase](https://github.com/abderrazzaq-laanoui/Covid19Track/tree/DataSet)
 
+![Schema de la base de données](/assets/schema.png)
 
 
 ## 5. L'introduction d'une interface console
