@@ -14,7 +14,7 @@ namespace Covid19Track
             this.nom = nom;
             this.reference = reference;
         }
-        
+
         public override string ToString()
         {
             return "Laboratoire " + nom + " est sous le reference: " + reference;
@@ -24,7 +24,7 @@ namespace Covid19Track
         {
             Random random = new Random();
             var tmp = random.NextDouble();
-            //Taux de positivité : 10%
+            //Probalité de positivité : 10%
             bool resultat = tmp >= 0.9;
             EnvoyerDonnees(citoyen, resultat);
             //Sauvgarder le test

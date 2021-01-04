@@ -14,7 +14,7 @@ namespace Covid19Track
         public static void ChangerEtatCitoyen(Citoyen citoyen, Etats etat)
         {
             citoyen.Etat = etat;
-            Record record = new Record(citoyen, DateTime.Now, etat);
+            citoyen.Records.Add(new Record(DateTime.Now, etat));
 
             if (etat == Etats.Infecte)
             {
@@ -24,17 +24,12 @@ namespace Covid19Track
 
         private static void checkContact(Citoyen citoyen)
         {
-            // quand un citoyen devient infecté tout les aurtes citoyen saint ou d'etat inconnu qu'il a contacter durant la derniere semaine devient Soupçonné
-
-            foreach (Rencontre rencontre in citoyen.Rencontres.Where(r => r.date >= DateTime.Now.AddDays(-7)))
+            // Quand un citoyen devient infecté tout les aurtes citoyen saint ou d'etat inconnu qu'il a contacter durant la derniere semaine devient Soupçonné.
+            foreach (Rencontre rencontre in citoyen.Rencontres.Where(r => r.date >= DateTime.Now.AddDays(-7)))                                                 
             {
                 if(rencontre.citoyen.Etat == Etats.Inconnu || rencontre.citoyen.Etat == Etats.Saint)
-                {
                     rencontre.citoyen.Etat = Etats.Soupconne;
-                }
-
             }
         }
-
     }
 }

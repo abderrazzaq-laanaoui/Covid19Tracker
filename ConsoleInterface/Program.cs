@@ -1,6 +1,13 @@
-﻿using System;
+﻿// File:    Program.cs
+// Author:  ABDERRAZZAQ LAANOUI
+// Created: 03 Janvier 2021 14:30:24
+// Purpose: Definition of Class Program
+
+
 using Covid19Track;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace ConsoleInterface
 {
@@ -9,6 +16,7 @@ namespace ConsoleInterface
         private static List<Citoyen> citoyens = new List<Citoyen>();
         private static List<Laboratoire> laboratoires = new List<Laboratoire>();
         private static List<CentreDeVaccination> centres = new List<CentreDeVaccination>();
+
         static void Main(string[] args)
         {
             while (true)
@@ -54,6 +62,18 @@ namespace ConsoleInterface
                     case 12:
                         RencentrerCitoyens();
                         break;
+                    case 13:
+                        ListerRencontres();
+                        break;
+                    case 14:
+                        ListerTestes();
+                        break;
+                    case 15:
+                        ListerEtats();
+                        break;
+                    case 16:
+                        ListerEtatsDate();
+                        break;
                     case 0:
                         Console.WriteLine("Quiter...");
                         return;
@@ -64,7 +84,42 @@ namespace ConsoleInterface
 
             }
         }
-        static int Menu()
+
+        private static void ListerEtatsDate()
+        {
+            Console.Write("Entrer le CNE de citoyen: ");
+            string cin = Console.ReadLine().Trim().ToUpper();
+            int index = FindCitoyen(cin);
+            if (index >= 0)
+            {
+                DateTime date;
+                Console.Write("Entrer La date: ");
+                var dateStr = Console.ReadLine().Trim();
+                try
+                {
+                    date = DateTime.ParseExact(dateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                }
+                catch (Exception)
+                {
+
+                    Console.WriteLine("format de date non valide !");
+                    return;
+                }
+                foreach (Etats etat in citoyens[index].GetEtat(date))
+                {
+                    Console.WriteLine($"Etat : {etat}.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Il y'a aucun citoyen avec ce CNE ");
+            }
+
+        }
+
+
+        private static int Menu()
         {
             while (true)
             {
@@ -81,6 +136,10 @@ namespace ConsoleInterface
                 Console.WriteLine("10) Faire un test PCR pour un citoyen.");
                 Console.WriteLine("11) Injecter une Dose de vaccin pour un Citoyen.");
                 Console.WriteLine("12) Rencontrer deux citoyens.");
+                Console.WriteLine("13) Lister les rencontres d'un citoyen.");
+                Console.WriteLine("14) Lister les testes d'un citoyen.");
+                Console.WriteLine("15) Lister les etats d'un citoyen.");
+                Console.WriteLine("16) Lister les etats d'un citoyen dans une date.");
                 Console.WriteLine("0)  Quiter.");
                 Console.Write("Choisier votre operation: ");
                 bool valide = int.TryParse(Console.ReadLine(), out int choice);
@@ -91,6 +150,81 @@ namespace ConsoleInterface
                     Console.WriteLine("Choix Non Valide ! Ressayer");
             }
         }
+        private static void ListerEtats()
+        {
+            Console.Write("Entrer le CNE de citoyen: ");
+            string cin = Console.ReadLine().Trim().ToUpper();
+            int index = FindCitoyen(cin);
+            if (index >= 0)
+            {
+                foreach (Record record in citoyens[index].Records)
+                {
+                    Console.WriteLine($"Date : {record.date}, Etat : {record.etat}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Il y'a aucun citoyen avec ce CNE ");
+            }
+        }
+
+        private static void ListerTestes()
+        {
+            Console.Write("Entrer le CNE de citoyen: ");
+            string cin = Console.ReadLine().Trim().ToUpper();
+            int index = FindCitoyen(cin);
+            if (index >= 0)
+            {
+                Console.WriteLine($"le citoyen  {citoyens[index].nom} {citoyens[index].prenom}  a fait :");
+                if (citoyens[index].Tests.Count == 0)
+                {
+                    Console.WriteLine("aucun test.");
+                }
+                else
+                {
+                    foreach (Test test in citoyens[index].Tests)
+                    {
+                        string resultat = test.resultat ? "Postitif" : "Negatif";
+                        Console.WriteLine($"Un Test dans le Laboratoire {test.laboratoire} avec une resultat {resultat}  le : {test.date.ToString("d")}");
+                    }
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Il y'a aucun citoyen avec ce CNE ");
+            }
+
+        }
+
+        private static void ListerRencontres()
+        {
+            Console.Write("Entrer le CNE de citoyen: ");
+            string cin = Console.ReadLine().Trim().ToUpper();
+            int index = FindCitoyen(cin);
+            if (index >= 0)
+            {
+                Console.WriteLine("le citoyen " + citoyens[index].nom + " " + citoyens[index].prenom + "  a fait :");
+                if (citoyens[index].Rencontres.Count == 0)
+                {
+                    Console.WriteLine("aucun rencontre.");
+                }
+                else
+                {
+                    foreach (Rencontre rencontre in citoyens[index].Rencontres)
+                    {
+                        Console.WriteLine("Un rencontre avec " + rencontre.citoyen.nom + " " + rencontre.citoyen.prenom + " le : " + rencontre.date.ToString("d"));
+                    }
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Il y'a aucun citoyen avec ce CNE ");
+            }
+
+        }
+
         private static void LiserCitoyens()
         {
             for (int i = 0; i < citoyens.Count; i++)
@@ -107,8 +241,8 @@ namespace ConsoleInterface
             if (index >= 0)
             {
                 Console.Write("Entrer le CNI de 2éme Citoyen: ");
-                string cni122 = Console.ReadLine().Trim();
-                int i = FindCitoyen(cni);
+                string cni2 = Console.ReadLine().Trim();
+                int i = FindCitoyen(cni2);
                 if (i >= 0)
                 {
                     citoyens[i].Contacter(citoyens[index]);
@@ -129,13 +263,13 @@ namespace ConsoleInterface
             {
                 Console.Write("Entrer le reference de Centre: ");
                 string reference = Console.ReadLine().Trim();
-                int i = FindECentre(reference);
+                int i = FindeCentre(reference);
                 if (i >= 0)
                 {
                     centres[i].InjecteDose(citoyens[index]);
                 }
                 else
-                    Console.WriteLine("Il y'a aucun laboratoire avec ce reference!");
+                    Console.WriteLine("Il y'a aucun centre avec ce reference!");
             }
             else
                 Console.WriteLine("Il y'a aucun citoyen avec ce CNI !");
@@ -190,7 +324,7 @@ namespace ConsoleInterface
         {
             Console.Write("Entrer le reference de la centre: ");
             string reference = Console.ReadLine().Trim();
-            int index = FindECentre(reference);
+            int index = FindeCentre(reference);
             if (index < 0)
             {
                 Console.WriteLine("Il y'a aucun centre avec ce reference !");
@@ -279,7 +413,7 @@ namespace ConsoleInterface
                 Console.WriteLine("Il y'a deja un citoyen avec meme CNI!");
 
         }
-        
+
         private static void AddLabo()
         {
             Console.Write("Entrer le reference de Labo: ");
@@ -295,16 +429,16 @@ namespace ConsoleInterface
 
 
         }
-        
+
         private static void AddCentre()
         {
             Console.Write("Entrer le reference de Centre: ");
             string reference = Console.ReadLine().Trim();
-            if (FindECentre(reference) < 0)
+            if (FindeCentre(reference) < 0)
             {
                 Console.Write("Entrer le Nom de Centre de vaccination: ");
                 string nom = Console.ReadLine().Trim();
-                centres.Add(new CentreDeVaccination(nom, reference));
+                centres.Add(new CentreDeVaccination(reference, nom));
             }
             else
                 Console.WriteLine("Il y'a deja un Centre avec meme reference!");
@@ -317,9 +451,9 @@ namespace ConsoleInterface
             return citoyens.FindIndex(citoyen => citoyen.CIN.Equals(cin));
         }
 
-        private static int FindECentre(string reference)
+        private static int FindeCentre(string reference)
         {
-            return centres.FindIndex(centre => centre.reference.Equals(reference));
+            return centres.FindIndex(centre => centre.reference.Equals(reference.ToUpper()));
         }
 
         private static int FindLabo(string reference)
@@ -328,4 +462,5 @@ namespace ConsoleInterface
         }
 
     }
+
 }

@@ -33,36 +33,38 @@ namespace Covid19Track
         public byte DosesInjectee { get; set; }
         // -------------------------------------------- //
         public List<Test> Tests;
-        private List<Record> Records;
+        public List<Record> Records { get; set; }
         private List<Isolation> Isolations;
         public List<Rencontre> Rencontres { get; set; }
 
         //ctor
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance)
         {
-            this.CIN = cin;
-            this.nom = nom;
-            this.prenom = prenom;
+            this.CIN = cin.ToUpper();
+            this.nom = nom.ToUpper();
+            this.prenom = prenom.ToUpper();
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.Etat = Etats.Inconnu;
             DosesInjectee = 0;
 
             Tests = new List<Test>();
             Records = new List<Record>();
+            Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
             Rencontres = new List<Rencontre>();
         }
 
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat)
         {
-            this.CIN = cin;
-            this.nom = nom;
-            this.prenom = prenom;
+            this.CIN = cin.ToUpper();
+            this.nom = nom.ToUpper();
+            this.prenom = prenom.ToUpper();
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.Etat = etat;
 
             Tests = new List<Test>();
             Records = new List<Record>();
+            Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
             Rencontres = new List<Rencontre>();
         }
@@ -115,12 +117,12 @@ namespace Covid19Track
             Rencontre.AddRencontre(this, citoyen);
         }
 
-        public Etats GetEtat(DateTime date)
+        public List<Etats> GetEtat(DateTime date)
         {
-            return Records.Last(r => r.date.Equals(date)).etat;
+            return Records.Where(r => r.date.Equals(date)).Select(r => r.etat).ToList();
         }
-        
-        //return a peer key, value of 
+
+        //return a peer key, value =>  date, etat
         public Dictionary<DateTime,Etats> GetEtats(DateTime dateDebut, DateTime dateFin)
         {
              return Records.Where(r => r.date >= dateDebut && r.date <= dateFin).ToDictionary(r => r.date , r => r.etat);

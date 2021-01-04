@@ -9,9 +9,9 @@ namespace Covid19Track
 {
     public class Test
     {
-        private DateTime date;
-        private bool resultat;
-        private string laboratoire;
+        public DateTime date { get; }
+        public bool resultat { get;  }
+        public string laboratoire { get;  }
 
         public Test(String labo, bool resultat)
         {
