@@ -33,7 +33,7 @@ namespace Covid19Track
         public byte DosesInjectee { get; set; }
         // -------------------------------------------- //
         public List<Test> Tests;
-        private List<Record> Records;
+        public List<Record> Records { get; set; }
         private List<Isolation> Isolations;
         public List<Rencontre> Rencontres { get; set; }
 

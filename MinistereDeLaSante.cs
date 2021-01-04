@@ -14,7 +14,7 @@ namespace Covid19Track
         public static void ChangerEtatCitoyen(Citoyen citoyen, Etats etat)
         {
             citoyen.Etat = etat;
-            Record record = new Record(citoyen, DateTime.Now, etat);
+            citoyen.Records.Add( new Record(DateTime.Now, etat));
 
             if (etat == Etats.Infecte)
             {
