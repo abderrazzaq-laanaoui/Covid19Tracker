@@ -18,5 +18,14 @@ namespace Covid19Track
             this.date = date;
             this.etat = etat;
         }
+
+        internal static void AddRecord(Citoyen citoyen, DateTime date)
+        {
+            citoyen.Records.Add(new Record(date, citoyen.Etat));
+            RecordDAO.Create(citoyen.CIN,citoyen.Etat,date);
+
+
+        }
+
     }
 }

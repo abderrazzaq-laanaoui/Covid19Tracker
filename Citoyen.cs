@@ -26,7 +26,7 @@ namespace Covid19Track
     public class Citoyen
     {
         public static List<Citoyen> citoyens = new List<Citoyen>();
-        // --------- Attributes -------------- //
+        /* --------- Attributes -------------- */
         public string CIN { get; }
         public string nom;
         public String prenom;
@@ -34,7 +34,7 @@ namespace Covid19Track
         private Etats etat;
         private byte dosesInjectee;
 
-        // --------- GETTERS / SETTERS -------------- //
+        /* --------- GETTERS / SETTERS -------------- */
         public Etats Etat
         {
             get => etat;
@@ -55,14 +55,14 @@ namespace Covid19Track
             }
         }
 
-        // --------- Citoyen Journal -------------- //
+        /* --------- Journal De Citoyen  -------------- */
         public List<Test> Tests;
         public List<Record> Records { get; set; }
         private List<Isolation> Isolations;
         public List<Rencontre> Rencontres { get; set; }
 
 
-        // ---------  constructor -------------- //
+        /* ---------  Constructor -------------- */
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance)
         {
             this.CIN = cin.ToUpper();
@@ -72,34 +72,9 @@ namespace Covid19Track
             this.etat = Etats.Inconnu;
             dosesInjectee = 0;
 
-            Records = new List<Record>();
-            Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
             RencontreDAO.FindAll(this);
-            TestDAO.FindAll(this);
-            //Ajouter a la liste:
-            citoyens.Add(this);
-
-            if (!CitoyenDAO.Excist(cin))
-            {
-                CitoyenDAO.Create(this);
-            }
-
-        }
-        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat, byte doses)
-        {
-            this.CIN = cin.ToUpper();
-            this.nom = nom.ToUpper();
-            this.prenom = prenom.ToUpper();
-            this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            this.etat = etat;
-            dosesInjectee = doses;
-
-
-            Records = new List<Record>();
-            Records.Add(new Record(DateTime.Now, Etat));
-            Isolations = new List<Isolation>();
-            RencontreDAO.FindAll(this);
+            RecordDAO.FindAll(this);
             TestDAO.FindAll(this);
             //Ajouter a la liste:
             citoyens.Add(this);
@@ -118,12 +93,11 @@ namespace Covid19Track
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.etat = etat;
             dosesInjectee = 0;
-
-            Records = new List<Record>();
-            Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
             RencontreDAO.FindAll(this);
+            RecordDAO.FindAll(this);
             TestDAO.FindAll(this);
+
             //Ajouter a la liste:
             citoyens.Add(this);
 
@@ -132,8 +106,31 @@ namespace Covid19Track
                 CitoyenDAO.Create(this);
             }
         }
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat, byte doses)
+        {
+            this.CIN = cin.ToUpper();
+            this.nom = nom.ToUpper();
+            this.prenom = prenom.ToUpper();
+            this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            this.etat = etat;
+            dosesInjectee = doses;
 
-        // ---------  Methodes -------------- //
+
+            Isolations = new List<Isolation>();
+            RencontreDAO.FindAll(this);
+            RecordDAO.FindAll(this);
+            TestDAO.FindAll(this);
+            //Ajouter a la liste:
+            citoyens.Add(this);
+
+            if (!CitoyenDAO.Excist(cin))
+            {
+                CitoyenDAO.Create(this);
+            }
+
+        }
+
+        /* ---------  Methodes -------------- */
         // Return l'etat d'un citoyen sous forme d'une chaine des caracteres
         public string ConsultationEtat()
         {
@@ -175,7 +172,7 @@ namespace Covid19Track
             this.Isolations.Add(new Isolation(e.SignalTime, DateTime.Now));
         }
 
-        //les operations a effectuer si un citoyen infecté rencotre un autre citoyen
+        //les operations a effectuer si un citoyen infecté rencontre un autre citoyen
         public void Contacter(Citoyen citoyen)
         {
             Rencontre.AddRencontre(this, citoyen);

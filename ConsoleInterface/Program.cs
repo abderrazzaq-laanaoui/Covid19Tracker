@@ -173,7 +173,7 @@ namespace ConsoleInterface
             {
                 foreach (Record record in citoyens[index].Records)
                 {
-                    Console.WriteLine($"Date : {record.date}, Etat : {record.etat}");
+                    Console.WriteLine($"Date : {record.date.ToShortDateString()}, Etat : {record.etat}");
                 }
             }
             else
