@@ -95,6 +95,7 @@
     <Compile Include="DataManipulation\DBManager.cs" />
     <Compile Include="DataManipulation\RencontreDAO.cs" />
     <Compile Include="DataManipulation\RecordDAO.cs" />
+    <Compile Include="DataManipulation\IsolationDAO.cs" />
     <Compile Include="DataManipulation\TestDAO.cs" />
     <Compile Include="Isolation.cs" />
     <Compile Include="MinistereDeLaSante.cs" />

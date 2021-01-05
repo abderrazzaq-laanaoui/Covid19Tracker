@@ -63,18 +63,21 @@ namespace ConsoleInterface
                         VaccinerCitoyen();
                         break;
                     case 12:
-                        RencentrerCitoyens();
+                        ConfinerCitoyen();
                         break;
                     case 13:
-                        ListerRencontres();
+                        RencentrerCitoyens();
                         break;
                     case 14:
-                        ListerTestes();
+                        ListerRencontres();
                         break;
                     case 15:
-                        ListerEtats();
+                        ListerTestes();
                         break;
                     case 16:
+                        ListerEtats();
+                        break;
+                    case 17:
                         ListerEtatsDate();
                         break;
                     case 0:
@@ -87,6 +90,56 @@ namespace ConsoleInterface
 
             }
 
+        }
+
+        private static void ConfinerCitoyen()
+        {
+            Console.Write("Entrer le CNI de Citoyen: ");
+            string cni = Console.ReadLine().Trim();
+            int index = FindCitoyen(cni);
+            if (index >= 0)
+            {
+                citoyens[index].SeConfiner();
+                Console.WriteLine("Confinement à été commancer");
+            }
+            else
+                Console.WriteLine("Il y'a aucun citoyen avec ce CNI !");
+        }
+
+        private static int Menu()
+        {
+            while (true)
+            {
+                Console.WriteLine("\n--------------------------------------");
+                Console.WriteLine("1)  Ajouter un Citoyen.");
+                Console.WriteLine("2)  Ajouter un Laboratoire.");
+                Console.WriteLine("3)  Ajouter un Centre de Vaccination.");
+                Console.WriteLine("---");
+                Console.WriteLine("4)  Afficher un Citoyen.");
+                Console.WriteLine("5)  Afficher un Laboratoire.");
+                Console.WriteLine("6)  Afficher un Centre de Vaccination.");
+                Console.WriteLine("---");
+                Console.WriteLine("7)  Lister Les Citoyens.");
+                Console.WriteLine("8)  Lister Les Laboratoire.");
+                Console.WriteLine("9)  Lister Les Centre de Vaccination.");
+                Console.WriteLine("---");
+                Console.WriteLine("10) Faire un test PCR pour un citoyen.");
+                Console.WriteLine("11) Injecter une Dose de vaccin pour un Citoyen.");
+                Console.WriteLine("12) Confiner un Citoyen.");
+                Console.WriteLine("13) Rencontrer deux citoyens.");
+                Console.WriteLine("14) Lister les rencontres d'un citoyen.");
+                Console.WriteLine("15) Lister les testes d'un citoyen.");
+                Console.WriteLine("16) Lister les etats d'un citoyen.");
+                Console.WriteLine("17) Lister les etats d'un citoyen dans une date.");
+                Console.WriteLine("0)  Quiter.");
+                Console.Write("Choisier votre operation: ");
+                bool valide = int.TryParse(Console.ReadLine(), out int choice);
+                Console.Clear();
+                if (valide)
+                    return choice;
+                else
+                    Console.WriteLine("Choix Non Valide ! Ressayer");
+            }
         }
 
         private static void LoadData()
@@ -132,38 +185,6 @@ namespace ConsoleInterface
 
         }
 
-
-        private static int Menu()
-        {
-            while (true)
-            {
-                Console.WriteLine("\n--------------------------------------");
-                Console.WriteLine("1)  Ajouter un Citoyen.");
-                Console.WriteLine("2)  Ajouter un Laboratoire.");
-                Console.WriteLine("3)  Ajouter un Centre de Vaccination.");
-                Console.WriteLine("4)  Afficher un Citoyen.");
-                Console.WriteLine("5)  Afficher un Laboratoire.");
-                Console.WriteLine("6)  Afficher un Centre de Vaccination.");
-                Console.WriteLine("7)  Lister Les Citoyens.");
-                Console.WriteLine("8)  Lister Les Laboratoire.");
-                Console.WriteLine("9)  Lister Les Centre de Vaccination.");
-                Console.WriteLine("10) Faire un test PCR pour un citoyen.");
-                Console.WriteLine("11) Injecter une Dose de vaccin pour un Citoyen.");
-                Console.WriteLine("12) Rencontrer deux citoyens.");
-                Console.WriteLine("13) Lister les rencontres d'un citoyen.");
-                Console.WriteLine("14) Lister les testes d'un citoyen.");
-                Console.WriteLine("15) Lister les etats d'un citoyen.");
-                Console.WriteLine("16) Lister les etats d'un citoyen dans une date.");
-                Console.WriteLine("0)  Quiter.");
-                Console.Write("Choisier votre operation: ");
-                bool valide = int.TryParse(Console.ReadLine(), out int choice);
-                Console.Clear();
-                if (valide)
-                    return choice;
-                else
-                    Console.WriteLine("Choix Non Valide ! Ressayer");
-            }
-        }
         private static void ListerEtats()
         {
             Console.Write("Entrer le CNE de citoyen: ");
@@ -475,7 +496,5 @@ namespace ConsoleInterface
         {
             return laboratoires.FindIndex(labo => labo.reference.Equals(reference));
         }
-
     }
-
 }

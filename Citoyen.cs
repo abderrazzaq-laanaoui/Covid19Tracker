@@ -56,9 +56,9 @@ namespace Covid19Track
         }
 
         /* --------- Journal De Citoyen  -------------- */
-        public List<Test> Tests;
+        public List<Test> Tests { get; set; }
         public List<Record> Records { get; set; }
-        private List<Isolation> Isolations;
+        public List<Isolation> Isolations { get; set; }
         public List<Rencontre> Rencontres { get; set; }
 
 
@@ -169,7 +169,7 @@ namespace Covid19Track
         private void EndConfinement(object sender, ElapsedEventArgs e)
         {
             MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Saint);
-            this.Isolations.Add(new Isolation(e.SignalTime, DateTime.Now));
+            Isolation.AddConfinement(this, e.SignalTime, DateTime.Now);
         }
 
         //les operations a effectuer si un citoyen infecté rencontre un autre citoyen

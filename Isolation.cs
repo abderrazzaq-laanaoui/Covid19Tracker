@@ -5,14 +5,23 @@
 
 using System;
 
-public class Isolation
+namespace Covid19Track
 {
-   private DateTime dateDebut;
-   private DateTime dateFin;
-
-    public Isolation(DateTime dateDebut, DateTime dateFin)
+    public class Isolation
     {
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
+        private DateTime dateDebut;
+        private DateTime dateFin;
+
+        public Isolation(DateTime dateDebut, DateTime dateFin)
+        {
+            this.dateDebut = dateDebut;
+            this.dateFin = dateFin;
+        }
+        public static void AddConfinement(Citoyen citoyen, DateTime DateDebut, DateTime DateFin)
+        {
+            citoyen.Isolations.Add(new Isolation(DateDebut, DateFin));
+            IsolationDAO.Create(citoyen.CIN, DateDebut, DateFin);
+
+        }
     }
 }
