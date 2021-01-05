@@ -46,6 +46,7 @@ namespace Covid19Track
             bool resultat = tmp >= 0.9;
             EnvoyerDonnees(citoyen, resultat);
             //Sauvgarder le test
+            Test.AddTest(citoyen,this.reference,resultat);
             citoyen.Tests.Add(new Test(this.reference, resultat));
             return resultat;
         }

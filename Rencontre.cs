@@ -31,6 +31,8 @@ namespace Covid19Track
         {
             c1.Rencontres.Add(new Rencontre(c2.CIN));
             c2.Rencontres.Add(new Rencontre(c1.CIN));
+
+            //Enregestrer dans un DB les rencontres d'une semaines
             RencontreDAO.Create(c1.CIN, c2.CIN, DateTime.Now);
             
         }
@@ -38,6 +40,8 @@ namespace Covid19Track
         {
             c1.Rencontres.Add(new Rencontre(c2.CIN, date));
             c2.Rencontres.Add(new Rencontre(c1.CIN, date));
+
+            //Enregestrer dans un DB les rencontres d'une semaines
             RencontreDAO.Create(c1.CIN, c2.CIN, date);
 
         }
