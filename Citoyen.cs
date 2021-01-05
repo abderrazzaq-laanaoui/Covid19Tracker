@@ -4,10 +4,10 @@
 // Purpose: Definition of Class Citoyen
 
 using System;
-using System.Timers;
-using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Timers;
 
 namespace Covid19Track
 {
@@ -29,8 +29,25 @@ namespace Covid19Track
         public string nom;
         public String prenom;
         public DateTime dateDeNaissance;
-        public Etats Etat { get; set; }
-        public byte DosesInjectee { get; set; }
+        public Etats Etat
+        {
+            get => Etat;
+            set
+            {
+                Etat = value;
+                CitoyenDAO.Update(this);
+
+            }
+        }
+        public byte DosesInjectee
+        {
+            get => DosesInjectee;
+            set
+            {
+                DosesInjectee = value;
+                CitoyenDAO.Update(this);
+            }
+        }
         // -------------------------------------------- //
         public List<Test> Tests;
         public List<Record> Records { get; set; }
@@ -52,6 +69,11 @@ namespace Covid19Track
             Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
             Rencontres = new List<Rencontre>();
+
+            if (CitoyenDAO.Find(cin) == null)
+            {
+                CitoyenDAO.Create(this);
+            }
         }
 
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat)
@@ -67,6 +89,12 @@ namespace Covid19Track
             Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
             Rencontres = new List<Rencontre>();
+
+            if (CitoyenDAO.Find(cin) == null)
+            {
+                CitoyenDAO.Create(this);
+            }
+
         }
 
         // Return l'etat d'un citoyen sous forme d'une chaine des caracteres
@@ -94,9 +122,9 @@ namespace Covid19Track
         // Les operation a faire si un citoyen a été isolé
         public void SeConfiner()
         {
-            if(Etat == Etats.Soupconne)
+            if (Etat == Etats.Soupconne)
             {
-                const double interval10j = 10 * 24 *  60 * 60 * 1000; // milliseconds => 10j
+                const double interval10j = 10 * 24 * 60 * 60 * 1000; // milliseconds => 10j
 
                 Timer checkForTime = new Timer(interval10j);
                 checkForTime.Elapsed += new ElapsedEventHandler(EndConfinement);
@@ -107,7 +135,7 @@ namespace Covid19Track
         private void EndConfinement(object sender, ElapsedEventArgs e)
         {
             MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Saint);
-            this.Isolations.Add(new Isolation(e.SignalTime,DateTime.Now));
+            this.Isolations.Add(new Isolation(e.SignalTime, DateTime.Now));
         }
 
         //les operations a effectuer si un citoyen infecté rencotre un autre citoyen
@@ -123,9 +151,9 @@ namespace Covid19Track
         }
 
         //return a peer key, value =>  date, etat
-        public Dictionary<DateTime,Etats> GetEtats(DateTime dateDebut, DateTime dateFin)
+        public Dictionary<DateTime, Etats> GetEtats(DateTime dateDebut, DateTime dateFin)
         {
-             return Records.Where(r => r.date >= dateDebut && r.date <= dateFin).ToDictionary(r => r.date , r => r.etat);
+            return Records.Where(r => r.date >= dateDebut && r.date <= dateFin).ToDictionary(r => r.date, r => r.etat);
         }
 
         public List<Rencontre> GetRencontres(DateTime date)

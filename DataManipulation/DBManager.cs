@@ -1,10 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Covid19Track.DataManipulation
 {
@@ -14,7 +10,8 @@ namespace Covid19Track.DataManipulation
         public static MySqlConnection Connection { get; set; }
         public static MySqlCommand Command { get; set; }
         public static MySqlDataAdapter Adapter { get; set; }
-
+        public static MySqlDataReader Result { get; set; }
+        public static DataTable dataTable;
 
         static DBManager()
         {
@@ -26,7 +23,9 @@ namespace Covid19Track.DataManipulation
                 Adapter = new MySqlDataAdapter(Command);
                 Command.Connection = Connection;
                 Adapter.SelectCommand = Command;
-               
+                dataTable = new DataTable();
+
+
             }
             catch (Exception ex)
             {

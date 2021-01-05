@@ -20,6 +20,7 @@ namespace Covid19Track
             {
                 checkContact(citoyen);
             }
+
         }
 
         private static void checkContact(Citoyen citoyen)
