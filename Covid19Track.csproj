@@ -93,6 +93,7 @@
     <Compile Include="DataManipulation\EtablisementDAO.cs" />
     <Compile Include="DataManipulation\CitoyenDAO.cs" />
     <Compile Include="DataManipulation\DBManager.cs" />
+    <Compile Include="DataManipulation\RencontreDAO.cs" />
     <Compile Include="Isolation.cs" />
     <Compile Include="MinistereDeLaSante.cs" />
     <Compile Include="Laboratoire.cs" />

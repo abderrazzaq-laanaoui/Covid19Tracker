@@ -9,12 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using static Covid19Track.Citoyen;
 
 namespace ConsoleInterface
 {
     class Program
     {
-        private static List<Citoyen> citoyens;
         private static List<Laboratoire> laboratoires;
         private static List<CentreDeVaccination> centres;
 
@@ -227,7 +227,8 @@ namespace ConsoleInterface
                 {
                     foreach (Rencontre rencontre in citoyens[index].Rencontres)
                     {
-                        Console.WriteLine("Un rencontre avec " + rencontre.citoyen.nom + " " + rencontre.citoyen.prenom + " le : " + rencontre.date.ToString("d"));
+                        Citoyen citoyen = citoyens.First(c => c.CIN.Equals(rencontre.citoyen));
+                        Console.WriteLine("Un rencontre avec le citoyen : " + rencontre.citoyen + " le : " + rencontre.date.ToString("d"));
                     }
                 }
 

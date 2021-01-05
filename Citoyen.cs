@@ -3,6 +3,7 @@
 // Created: 03 December 2020 00:42:21
 // Purpose: Definition of Class Citoyen
 
+using Covid19Track.DataManipulation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,6 +25,7 @@ namespace Covid19Track
 
     public class Citoyen
     {
+        public static List<Citoyen> citoyens = new List<Citoyen>();
         //attributes
         public string CIN { get; }
         public string nom;
@@ -72,7 +74,9 @@ namespace Covid19Track
             Records = new List<Record>();
             Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
-            Rencontres = new List<Rencontre>();
+            RencontreDAO.FindAll(this);
+            //Ajouter a la liste:
+            citoyens.Add(this);
 
             if (!CitoyenDAO.Excist(cin))
             {
@@ -95,7 +99,15 @@ namespace Covid19Track
             Records = new List<Record>();
             Records.Add(new Record(DateTime.Now, Etat));
             Isolations = new List<Isolation>();
-            Rencontres = new List<Rencontre>();
+            RencontreDAO.FindAll(this);
+            //Ajouter a la liste:
+            citoyens.Add(this);
+
+            if (!CitoyenDAO.Excist(cin))
+            {
+                CitoyenDAO.Create(this);
+            }
+
 
             if (!CitoyenDAO.Excist(cin))
             {

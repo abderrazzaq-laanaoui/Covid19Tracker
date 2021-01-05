@@ -10,6 +10,7 @@ namespace Covid19Track
     public class Record
     {
         public DateTime date { get; }
+
         public Etats etat { get; }
 
         public Record(DateTime date, Etats etat)

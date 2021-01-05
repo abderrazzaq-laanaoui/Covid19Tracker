@@ -4,6 +4,7 @@
 // Purpose: Definition of Class Record
 
 
+using Covid19Track.DataManipulation;
 using System;
 using System.Collections.Generic;
 
@@ -12,15 +13,15 @@ namespace Covid19Track
     public class Rencontre
     {
 
-        public Citoyen citoyen { get; }
+        public string citoyen { get; }
         public DateTime date { get; }
 
-        private Rencontre( Citoyen citoyen)
+        private Rencontre( string citoyen)
         {
             this.citoyen = citoyen;
             date = DateTime.Now;
         }
-        private Rencontre(Citoyen citoyen, DateTime date)
+        public Rencontre(string citoyen, DateTime date)
         {
             this.citoyen = citoyen;
             this.date = date;
@@ -28,13 +29,17 @@ namespace Covid19Track
         
         public static void AddRencontre(Citoyen c1, Citoyen c2)
         {
-            c1.Rencontres.Add(new Rencontre(c2));
-            c2.Rencontres.Add(new Rencontre(c1));
+            c1.Rencontres.Add(new Rencontre(c2.CIN));
+            c2.Rencontres.Add(new Rencontre(c1.CIN));
+            RencontreDAO.Create(c1.CIN, c2.CIN, DateTime.Now);
+            
         }
         public static void AddRencontre(Citoyen c1, Citoyen c2, DateTime date)
         {
-            c1.Rencontres.Add(new Rencontre(c2, date));
-            c2.Rencontres.Add(new Rencontre(c1, date));
+            c1.Rencontres.Add(new Rencontre(c2.CIN, date));
+            c2.Rencontres.Add(new Rencontre(c1.CIN, date));
+            RencontreDAO.Create(c1.CIN, c2.CIN, date);
+
         }
     }
 }
