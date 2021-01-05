@@ -34,7 +34,7 @@ namespace Covid19Track
         private Etats etat;
         private byte dosesInjectee;
 
-        /* --------- GETTERS / SETTERS -------------- */
+        /* --------- GETTERS/SETTERS -------------- */
         public Etats Etat
         {
             get => etat;
