@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Citoyen.cs" />
+    <Compile Include="DataManipulation\EtablisementDAO.cs" />
     <Compile Include="DataManipulation\CitoyenDAO.cs" />
     <Compile Include="DataManipulation\DBManager.cs" />
     <Compile Include="Isolation.cs" />

@@ -29,22 +29,26 @@ namespace Covid19Track
         public string nom;
         public String prenom;
         public DateTime dateDeNaissance;
+        private Etats etat;
+        private byte dosesInjectee;
+
+
         public Etats Etat
         {
-            get => Etat;
+            get => etat;
             set
             {
-                Etat = value;
+                etat = value;
                 CitoyenDAO.Update(this);
 
             }
         }
         public byte DosesInjectee
         {
-            get => DosesInjectee;
+            get => dosesInjectee;
             set
             {
-                DosesInjectee = value;
+                dosesInjectee = value;
                 CitoyenDAO.Update(this);
             }
         }
@@ -61,8 +65,8 @@ namespace Covid19Track
             this.nom = nom.ToUpper();
             this.prenom = prenom.ToUpper();
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            this.Etat = Etats.Inconnu;
-            DosesInjectee = 0;
+            this.etat = Etats.Inconnu;
+            dosesInjectee = 0;
 
             Tests = new List<Test>();
             Records = new List<Record>();
@@ -70,19 +74,44 @@ namespace Covid19Track
             Isolations = new List<Isolation>();
             Rencontres = new List<Rencontre>();
 
-            if (CitoyenDAO.Find(cin) == null)
+            if (!CitoyenDAO.Excist(cin))
             {
                 CitoyenDAO.Create(this);
             }
+
         }
 
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat, byte doses)
+        {
+            this.CIN = cin.ToUpper();
+            this.nom = nom.ToUpper();
+            this.prenom = prenom.ToUpper();
+            this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            this.etat = etat;
+            dosesInjectee = doses;
+
+
+            Tests = new List<Test>();
+            Records = new List<Record>();
+            Records.Add(new Record(DateTime.Now, Etat));
+            Isolations = new List<Isolation>();
+            Rencontres = new List<Rencontre>();
+
+            if (!CitoyenDAO.Excist(cin))
+            {
+                CitoyenDAO.Create(this);
+            }
+
+        }
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat)
         {
             this.CIN = cin.ToUpper();
             this.nom = nom.ToUpper();
             this.prenom = prenom.ToUpper();
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            this.Etat = etat;
+            this.etat = etat;
+            dosesInjectee = 0;
+
 
             Tests = new List<Test>();
             Records = new List<Record>();
@@ -90,7 +119,7 @@ namespace Covid19Track
             Isolations = new List<Isolation>();
             Rencontres = new List<Rencontre>();
 
-            if (CitoyenDAO.Find(cin) == null)
+            if (!CitoyenDAO.Excist(cin))
             {
                 CitoyenDAO.Create(this);
             }

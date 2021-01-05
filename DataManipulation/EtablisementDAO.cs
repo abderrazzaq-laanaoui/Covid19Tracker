@@ -6,16 +6,15 @@ using System.Data;
 
 namespace Covid19Track
 {
-    public static class CitoyenDAO 
+    public static class EtablisementDAO 
     {
-        public static Citoyen Create(Citoyen dto)
+        public static Etablissement Create(Etablissement dto, int type)
         {
             try
             {
                 Connection.Open();
-                Command.CommandText = "INSERT INTO `Citoyen` (`cin`, `prenom`, `nom`, `date`, `etat`, `doses`)" +
-                    $" VALUES ('{dto.CIN.ToUpper()}', '{dto.prenom.ToUpper()}', '{dto.nom.ToUpper()}'," +
-                    $" (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), '{(int)dto.Etat}', '{dto.DosesInjectee}')";
+                Command.CommandText = "INSERT INTO `Etablisement` (`reference`, `nom`, `type`)" +
+                    $" VALUES ('{dto.reference.ToUpper()}', '{dto.nom.ToUpper()}', '{type}',";
                 Command.Connection = Connection;
                 Command.ExecuteNonQuery();
 
@@ -32,15 +31,15 @@ namespace Covid19Track
             return dto;
 
         }
-        public static bool Excist(string cin)
+        public static bool Excist(string reference, int type)
         {
             bool res = false;
             try
             {
-                cin = cin.Trim().ToUpper();
+                reference = reference.Trim().ToUpper();
                 if (Cnx.State != System.Data.ConnectionState.Open)
                     Cnx.Open();
-                Command.CommandText = "SELECT COUNT(*) FROM `Citoyen` WHERE `cin`='" + cin + "'";
+                Command.CommandText = "SELECT COUNT(*) FROM `Etablisement` WHERE `type`='" + type + "' and `reference` = '"+reference+"'";
                 Command.Connection = Cnx;
                 int R = Convert.ToInt32(Command.ExecuteScalar());
                 res = R != 0;
@@ -61,21 +60,28 @@ namespace Covid19Track
         }
 
 
-        public static Citoyen Find(string cin)
+        public static Etablissement Find(string reference, int type)
         {
-            Citoyen res = null;
+            Etablissement res = null;
             try
             {
-                cin = cin.Trim().ToUpper();
+                reference = reference.Trim().ToUpper();
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = "SELECT * FROM `Citoyen` WHERE `cin`='" + cin + "'";
+                Command.CommandText = "SELECT *  FROM `Etablisement` WHERE `type`='" + type + "' and `reference` = '" + reference + "'";
                 Command.Connection = Connection;
                 Result = Command.ExecuteReader();
 
                 if (Result.Read())
-                    res = new Citoyen(Result[0].ToString(), Result[1].ToString(), Result[2].ToString(),
-                        DateTime.Parse(Result[3].ToString()).ToString("d"), (Etats)Int64.Parse(Result[4].ToString()));
+                    if (type == 1)
+                    {
+                        res = new Laboratoire(Result[0].ToString(), Result[1].ToString());
+                    }
+                    else
+                    {
+                        res = new CentreDeVaccination(Result[0].ToString(), Result[1].ToString());
+
+                    }
             }
             catch (Exception ex)
             {
@@ -90,15 +96,15 @@ namespace Covid19Track
             return res;
         }
 
-        public static List<Citoyen> FindAll()
+        public static List<Etablissement> FindAll(int type)
         {
-            List<Citoyen> citoyens = new List<Citoyen>();
+            List<Etablissement> etablissements = new List<Etablissement>();
 
             try
             {
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = "SELECT * FROM `Citoyen`";
+                Command.CommandText = "SELECT * FROM `Etablisement` WHERE `type` = '"+type+"'";
                 Command.Connection = Connection;
                 using (var reader = Command.ExecuteReader())
                 {
@@ -107,11 +113,18 @@ namespace Covid19Track
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         var row = dt.Rows[i];
-                        var c = new Citoyen(row[0].ToString(),
-                           row[1].ToString(), row[2].ToString(),
-                           DateTime.Parse(row[3].ToString()).ToString("d"),
-                           (Etats)int.Parse(row[4].ToString()), byte.Parse(row[5].ToString()));
-                        citoyens.Add(c);
+                        Etablissement e; 
+                        if (type == 1)
+                        {
+                            e = new Laboratoire(row[0].ToString(), row[1].ToString());
+                        }
+                        else
+                        {
+                            e = new CentreDeVaccination(row[0].ToString(), row[1].ToString());
+
+                        }
+                        
+                        etablissements.Add(e);
                     }
                 }
                
@@ -125,17 +138,17 @@ namespace Covid19Track
                 if (Connection.State == System.Data.ConnectionState.Open)
                     Connection.Close();
             }
-            return citoyens;
+            return etablissements;
         }
 
-        public static void Delete(string cin)
+        public static void Delete(string reference, int type)
         {
             try
             {
-                cin = cin.Trim().ToUpper();
+                reference = reference.Trim().ToUpper();
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = "DELETE FROM `Citoyen` WHERE `cin`='" + cin + "'";
+                Command.CommandText = "DELETE FROM `Etablisement` WHERE `reference`='" + reference + "' and `type`='" + type + "';";
                 Command.Connection = Connection;
                 int i = Command.ExecuteNonQuery();
             }
@@ -151,14 +164,14 @@ namespace Covid19Track
 
         }
 
-        public static Citoyen Update(Citoyen dto)
+        public static Etablissement Update(Etablissement dto, int type)
         {
             try
             {
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = $"UPDATE Citoyen SET prenom = '{dto.prenom.ToUpper()}', nom = '{dto.nom.ToUpper()}'," +
-                    $" date = '{dto.dateDeNaissance.ToString("d")}', etat = '{(int) dto.Etat}', doses = '{dto.DosesInjectee}' WHERE `cin` = '{dto.CIN}'; ";
+                Command.CommandText = $"UPDATE `Etablisement` SET  nom = '{dto.nom.ToUpper()}'" +
+                    $" WHERE `reference` = '{dto.reference}' and `type` = {type};";
                 Command.Connection = Connection;
                 Command.ExecuteNonQuery();
             }

@@ -13,12 +13,14 @@ namespace ConsoleInterface
 {
     class Program
     {
-        private static List<Citoyen> citoyens = new List<Citoyen>();
+        private static List<Citoyen> citoyens;
         private static List<Laboratoire> laboratoires = new List<Laboratoire>();
         private static List<CentreDeVaccination> centres = new List<CentreDeVaccination>();
 
         static void Main(string[] args)
         {
+            LoadData();
+
             while (true)
             {
                 int choice = Menu();
@@ -84,6 +86,13 @@ namespace ConsoleInterface
 
             }
 
+        }
+
+        private static void LoadData()
+        {
+            Console.WriteLine("wait...");
+            citoyens = CitoyenDAO.FindAll();
+            Console.Clear();
         }
 
         private static void ListerEtatsDate()
