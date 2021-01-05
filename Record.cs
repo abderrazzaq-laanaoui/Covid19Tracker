@@ -17,7 +17,5 @@ namespace Covid19Track
             this.date = date;
             this.etat = etat;
         }
-
-       
     }
 }

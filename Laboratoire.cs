@@ -9,10 +9,28 @@ namespace Covid19Track
 {
     public class Laboratoire : Etablissement
     {
+        public string nom
+        {
+            get => _nom;
+            set
+            {
+                _nom = value;
+                EtablisementDAO.Update(this, 1);
+            }
+        } public string reference
+        {
+            get => _reference;
+        }
+
         public Laboratoire(string reference, string nom)
         {
-            this.nom = nom;
-            this.reference = reference;
+            this._nom = nom;
+            this._reference = reference;
+
+            if (!EtablisementDAO.Excist(reference,1))
+            {
+                EtablisementDAO.Create(this,1);
+            }
         }
 
         public override string ToString()

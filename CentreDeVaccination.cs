@@ -8,10 +8,28 @@ namespace Covid19Track
     // date de vaccination est calculable (DURÉE DE PROTECTION ) => Last record vaccinee
     public class CentreDeVaccination : Etablissement
     {
+        public string nom
+        {
+            get => _nom;
+            set
+            {
+                _nom = value;
+                EtablisementDAO.Update(this, 2);
+            }
+        }
+        public string reference
+        {
+            get => _reference;
+        }
         public CentreDeVaccination(string reference, string nom)
         {
-            this.nom = nom;
-            this.reference = reference;
+            this._nom = nom;
+            this._reference = reference;
+
+            if (!EtablisementDAO.Excist(reference, 2))
+            {
+                EtablisementDAO.Create(this, 2);
+            }
         }
 
         public override string ToString()

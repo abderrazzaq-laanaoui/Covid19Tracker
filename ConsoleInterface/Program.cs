@@ -8,14 +8,15 @@ using Covid19Track;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace ConsoleInterface
 {
     class Program
     {
         private static List<Citoyen> citoyens;
-        private static List<Laboratoire> laboratoires = new List<Laboratoire>();
-        private static List<CentreDeVaccination> centres = new List<CentreDeVaccination>();
+        private static List<Laboratoire> laboratoires;
+        private static List<CentreDeVaccination> centres;
 
         static void Main(string[] args)
         {
@@ -92,6 +93,9 @@ namespace ConsoleInterface
         {
             Console.WriteLine("wait...");
             citoyens = CitoyenDAO.FindAll();
+            laboratoires =  EtablisementDAO.FindAll(1).OfType<Laboratoire>().ToList();
+            centres =  EtablisementDAO.FindAll(2).OfType<CentreDeVaccination>().ToList();
+
             Console.Clear();
         }
 

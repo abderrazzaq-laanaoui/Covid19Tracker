@@ -7,9 +7,9 @@ namespace Covid19Track
 {
     public abstract class Etablissement
     {
-        public string nom { get; set; }
+        protected string _nom { get; set; }
         
-        public string reference { get; set; }
+        protected string _reference { get; set; }
 
         protected abstract void EnvoyerDonnees(Citoyen citoyen, bool resultat);
         
