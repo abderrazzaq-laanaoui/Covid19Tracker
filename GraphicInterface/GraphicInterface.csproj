@@ -86,6 +86,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Assets\Fonts\Roboto-Light.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -95,18 +96,30 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\closeBtn_default.png" />
-    <Resource Include="Assets\closeBtn_MouseOver.png" />
-    <Resource Include="Assets\img_citoyen.png" />
-    <Resource Include="Assets\img_home.png" />
-    <Resource Include="Assets\tgBtn_default.png" />
-    <Resource Include="Assets\tgBtn_MouseOver.png" />
+    <Resource Include="Assets\Images\closeBtn_default.png" />
+    <Resource Include="Assets\Images\closeBtn_MouseOver.png" />
+    <Resource Include="Assets\Images\img_citoyen.png" />
+    <Resource Include="Assets\Images\img_home.png" />
+    <Resource Include="Assets\Images\tgBtn_default.png" />
+    <Resource Include="Assets\Images\tgBtn_MouseOver.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Covid19Track.csproj">
       <Project>{b638e7d5-bbd7-484e-899c-72689d706ca6}</Project>
       <Name>Covid19Track</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Fonts\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\img_stat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\img_etablisment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\img_exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

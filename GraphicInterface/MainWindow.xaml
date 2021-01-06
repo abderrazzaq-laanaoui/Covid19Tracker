@@ -6,11 +6,72 @@
         xmlns:local="clr-namespace:GraphicInterface"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Title="Covid19Tracker" Height="800" Width="1000" >
+        Title="Covid19Tracker" Height="800" Width="1100" >
+    
+    <Window.Resources>
+        <!--Toggle Button-->
+        <ImageBrush x:Key="tb_mouse_over"
+                    ImageSource="pack://application:,,,/Assets/Images/tgBtn_MouseOver.png" /> 
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}" />
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Text Stype-->
+        <Style x:Key="sont_style" TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="Assets/Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="22" />
+        </Style>
+        <!--ToolTip Style-->
+        <Style x:Key="tt_style" TargetType="ToolTip">
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="#4A5668"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Assets/Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="PlacementRectangle" Value="60,0,0,0" />
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
+    </Window.Resources>
     
     <Grid>
         <!--BackGround-->
-        <Grid Background="Black" >
+        <Grid Background="WhiteSmoke" >
             <!--Nav Menu-->
             <Grid x:Name="SideNav"
                   HorizontalAlignment="Left"
@@ -20,20 +81,39 @@
                 <StackPanel x:Name="StPanel">
                     <!--Menu Toggler--> 
                     <Grid Height="90">
-                        <ToggleButton x:Name="TgBtn"
-                                      Grid.Column="0"
+                        <!--Menu title Text-->
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Margin="72,-20,0,0"
+                                   Text="M E N U"
+                                   Foreground="White"
+                                   FontSize="30"
+                                   FontWeight="Bold"
+                                   Background="Transparent"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource sont_style}">
+                            
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="10"
+                                                  ShadowDepth="1"
+                                                  Direction="-90"
+                                                  Color="White"/>
+                            </TextBlock.Effect>
+                            
+                        </TextBlock>
+                        <ToggleButton x:Name="TgBtn" Grid.Column="0"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
-                                      Margin="14,-20,0,0"
-                                      Height="35"
-                                      Width="35"
-                                      BorderThickness="0" >
+                                      Margin="14,-20,0,0" BorderThickness="0" 
+                                      Height="35" Width="35" 
+                                      Style="{StaticResource tb_style}">
 
                             <ToggleButton.Background>
-                                <ImageBrush ImageSource="pack://application:,,,/Assets/tgBtn_default.png"></ImageBrush>
+                                <ImageBrush ImageSource="pack://application:,,,/Assets/Images/tgBtn_default.png"></ImageBrush>
                             </ToggleButton.Background>
 
                             <ToggleButton.Triggers>
+                                <!--Menu Hide-->
                                 <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                     <BeginStoryboard>
                                         <Storyboard x:Name="HideStPanel">
@@ -41,33 +121,131 @@
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0" Duration="0:0:0.2"
                                                              From="230" To="65">
-
                                             </DoubleAnimation>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
+                                <!--Menu Show-->
                                 <EventTrigger RoutedEvent="ToggleButton.Checked">
                                     <BeginStoryboard>
                                         <Storyboard x:Name="ShowStPanel">
-                                                <DoubleAnimation Storyboard.TargetName="SideNav"
+                                            <DoubleAnimation Storyboard.TargetName="SideNav"
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0" Duration="0:0:0.3"
                                                              From="65" To="230">
-
-                                                </DoubleAnimation>
-                                            </Storyboard>
+                                            </DoubleAnimation>
+                                        </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                             </ToggleButton.Triggers>
 
                         </ToggleButton>
-                        
                     </Grid>
+                    
+                    <!--Menu List Items-->
+                    <ListView x:Name="LV"
+                              Background="Transparent"
+                              BorderBrush="Transparent"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <!--Accueil-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="Assets/Images/img_home.png"
+                                       Stretch="None"
+                                       Margin="1,0,0,0" />
+                                <TextBlock Text="Accueil" 
+                                           Margin="25,0,0,0"
+                                           Style="{StaticResource sont_style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_home"
+                                         Content="Accueil"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--statestiques-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="Assets/Images/img_stat.png"
+                                       Stretch="None"
+                                       Margin="2,0,0,0" />
+                                <TextBlock Text="Statestiques" 
+                                           Margin="18,0,0,0"
+                                           Style="{StaticResource sont_style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_stat"
+                                         Content="Statestiques"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--Citoyens-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="Assets/Images/img_citoyen.png"
+                                       Stretch="None"
+                                       Margin="2,0,0,0" />
+                                <TextBlock Text="Citoyens" 
+                                           Margin="18,0,0,0"
+                                           Style="{StaticResource sont_style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_citoyen"
+                                         Content="Citoyens"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--Etablisments-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="Assets/Images/img_etablisment.png"
+                                       Stretch="None"
+                                       Margin="2,0,0,0" />
+                                <TextBlock Text="Etablisments" 
+                                           Margin="18,0,0,0"
+                                           Style="{StaticResource sont_style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_etablisment"
+                                         Content="Etablisments"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--Exit-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      
+                                      VerticalAlignment="Bottom"
+                                      Margin="0,375,0,15">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="230">
+                                <Image Source="Assets/Images/img_exit.png"
+                                       Stretch="None"
+                                       Margin="2,0,0,0" />
+                                <TextBlock Text="Exit" 
+                                           Margin="18,0,0,0"
+                                           Style="{StaticResource sont_style}"/>
+                            </StackPanel>
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_exit"
+                                         Content="Exit"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        
+                    </ListView>
                     
                 </StackPanel>
                 
             </Grid>
-            
+           
         </Grid>
         
         
