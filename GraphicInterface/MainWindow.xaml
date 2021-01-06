@@ -4,15 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphicInterface"
+        xmlns:viewmodles="clr-namespace:GraphicInterface.ViewModeles"
+        xmlns:views="clr-namespace:GraphicInterface.Views"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
         Title="Covid19Tracker" Height="800" Width="1100" >
     
     <Window.Resources>
-        <!--Toggle Button-->
+        <!--change toggle button--> 
         <ImageBrush x:Key="tb_mouse_over"
                     ImageSource="pack://application:,,,/Assets/Images/tgBtn_MouseOver.png" /> 
+        <!--Toggle Button-->
         <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -67,8 +70,8 @@
             <Setter Property="HasDropShadow" Value="True"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
         </Style>
-        <!--Close Button Style-->
-        <Style x:Key="CloseBtn" TargetType="{x:Type Button}">
+        <!-- Button Style-->
+        <Style x:Key="BtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Template" >
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -81,6 +84,19 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Views-->
+        <DataTemplate x:Name="HomeViewTemplate" DataType="{x:Type viewmodles:HomeVM}">
+            <views:Home DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="StatestiquesViewTemplate" DataType="{x:Type viewmodles:StatestiquesVM}">
+            <views:Statestiques DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="CitoyenViewTemplate" DataType="{x:Type viewmodles:CitoyenVM}">
+            <views:Citoyen DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="EtablisementViewTemplate" DataType="{x:Type viewmodles:EtablisementVM}">
+            <views:Etablisement DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
     
     <Grid>
@@ -168,12 +184,16 @@
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <!--Accueil-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+                                      Margin="3,0,0,15" MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Image Source="Assets/Images/img_home.png"
-                                       Stretch="None"
-                                       Margin="1,0,0,0" />
+                                <Button x:Name="AccueilBtn"
+                                    Height="auto" Width="45"
+                                    Style="{StaticResource BtnStyle}" Click="AccueilBtn_Click">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Assets/Images/img_home.png" />
+                                    </Button.Background>
+                                </Button>
                                 <TextBlock Text="Accueil" 
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
@@ -186,12 +206,16 @@
                         </ListViewItem>
                         <!--statestiques-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+                                      Margin="3,0,0,15" MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Image Source="Assets/Images/img_stat.png"
-                                       Stretch="None"
-                                       Margin="2,0,0,0" />
+                                <Button x:Name="statestiquesBtn"
+                                    Height="auto" Width="45"
+                                    Style="{StaticResource BtnStyle}" Click="statestiquesBtn_Click">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Assets/Images/img_stat.png" />
+                                    </Button.Background>
+                                </Button>
                                 <TextBlock Text="Statestiques" 
                                            Margin="18,0,0,0"
                                            Style="{StaticResource font_style}"/>
@@ -204,12 +228,16 @@
                         </ListViewItem>
                         <!--Citoyens-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+                                      Margin="3,0,0,15" MouseEnter="ListViewItem_MouseEnter">
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Image Source="Assets/Images/img_citoyen.png"
-                                       Stretch="None"
-                                       Margin="2,0,0,0" />
+                                <Button x:Name="CitoyenBtn"
+                                    Height="auto" Width="45"
+                                    Style="{StaticResource BtnStyle}" Click="CitoyenBtn_Click">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Assets/Images/img_citoyen.png" />
+                                    </Button.Background>
+                                </Button>
                                 <TextBlock Text="Citoyens" 
                                            Margin="18,0,0,0"
                                            Style="{StaticResource font_style}"/>
@@ -222,12 +250,15 @@
                         </ListViewItem>
                         <!--Etablisments-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="-2,0,0,15" MouseEnter="ListViewItem_MouseEnter">
-                            <StackPanel Orientation="Horizontal"
-                                        Width="230">
-                                <Image Source="Assets/Images/img_etablisment.png"
-                                       Stretch="None"
-                                       Margin="2,0,0,0" />
+                                      Margin="2,0,0,15" MouseEnter="ListViewItem_MouseEnter">
+                            <StackPanel Orientation="Horizontal" Width="230">
+                                <Button x:Name="EtablismentBtn"
+                                    Height="auto" Width="45"
+                                    Style="{StaticResource BtnStyle}" Click="EtablismentBtn_Click">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Assets/Images/img_etablisment.png" />
+                                    </Button.Background>
+                                </Button>
                                 <TextBlock Text="Etablisments" 
                                            Margin="18,0,0,0"
                                            Style="{StaticResource font_style}"/>
@@ -240,18 +271,17 @@
                         </ListViewItem>
                         <!--Exit-->
                         <ListViewItem HorizontalAlignment="Left"
-                                      Margin="5,385,0,15"  MouseEnter="ListViewItem_MouseEnter">
-                           
+                                      Margin="3,385,0,15"  MouseEnter="ListViewItem_MouseEnter">
+
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
                                 <Button x:Name="CloseBtn"
                                     Height="auto"
                                     Width="40" Click="CloseBtn_Click"
-                                        Style="{StaticResource CloseBtn}">
+                                        Style="{StaticResource BtnStyle}">
                                     <Button.Background>
                                         <ImageBrush ImageSource="Assets/Images/img_exit.png" />
                                     </Button.Background>
-
                                 </Button>
                                 <TextBlock Text="Exit" 
                                            Margin="18,0,0,0"
@@ -297,17 +327,14 @@
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-                        </ListView.ItemContainerStyle>   
+                        </ListView.ItemContainerStyle>
                     </ListView>
-                    
                 </StackPanel>
                 
             </Grid>
             
             <!--View-->
-            <ContentControl x:Name="View" Background="WhiteSmoke" Grid.Column="1"
-                  PreviewMouseLeftButtonDown="View_PreviewMouseLeftButtonDown"/>
-
+            <ContentControl x:Name="View" Grid.Column="1" Content="{Binding}"/>
         </Grid>
         
         

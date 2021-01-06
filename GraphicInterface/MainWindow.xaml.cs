@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using GraphicInterface.ViewModeles;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GraphicInterface
@@ -49,6 +50,29 @@ namespace GraphicInterface
                 Application.Current.Shutdown();
             }
 
+        }
+
+        private void AccueilBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new HomeVM();
+
+        }
+
+        private void statestiquesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new StatestiquesVM();
+
+        }
+
+        private void CitoyenBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new CitoyenVM();
+
+        }
+
+        private void EtablismentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new EtablisementVM();
         }
     }
 }
