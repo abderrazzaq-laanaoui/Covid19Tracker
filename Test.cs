@@ -32,8 +32,6 @@ namespace Covid19Track
         {
             citoyen.Tests.Add(new Test(laboratoire, resultat));
             TestDAO.Create(citoyen.CIN, laboratoire, resultat, DateTime.Now);
-
-
         }
     }
 
