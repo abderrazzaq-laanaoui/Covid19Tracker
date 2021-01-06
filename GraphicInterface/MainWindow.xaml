@@ -27,14 +27,37 @@
                                       Margin="14,-20,0,0"
                                       Height="35"
                                       Width="35"
-                                      BorderThickness="0">
+                                      BorderThickness="0" >
 
                             <ToggleButton.Background>
                                 <ImageBrush ImageSource="pack://application:,,,/Assets/tgBtn_default.png"></ImageBrush>
                             </ToggleButton.Background>
 
                             <ToggleButton.Triggers>
-                                
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="HideStPanel">
+                                            <DoubleAnimation Storyboard.TargetName="SideNav"
+                                                             Storyboard.TargetProperty="Width"
+                                                             BeginTime="0:0:0" Duration="0:0:0.2"
+                                                             From="230" To="65">
+
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="ShowStPanel">
+                                                <DoubleAnimation Storyboard.TargetName="SideNav"
+                                                             Storyboard.TargetProperty="Width"
+                                                             BeginTime="0:0:0" Duration="0:0:0.3"
+                                                             From="65" To="230">
+
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
                             </ToggleButton.Triggers>
 
                         </ToggleButton>
