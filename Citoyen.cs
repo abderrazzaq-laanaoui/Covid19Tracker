@@ -22,6 +22,21 @@ namespace Covid19Track
         Vaccine,
         Decede
     }
+    public enum Regions
+    {
+        Tangier_Tetouan_AlHociema,
+        Oriental,
+        Fez_Meknes,
+        Rabat_Sale_Kenitra,
+        BeniMellal_Khenifra,
+        CasaBlanca_Settat,
+        Marrakesh_Safi,
+        Draa_Tafilalt,
+        Sous_Massa,
+        Guelmim_OuedNoun,
+        Laayoune_SakiaElHamra,
+        Dakhla_OuedEddahab
+    }
 
     public class Citoyen
     {
@@ -31,6 +46,8 @@ namespace Covid19Track
         public string nom;
         public String prenom;
         public DateTime dateDeNaissance;
+        public Regions Region { get; }
+
         private Etats etat;
         private byte dosesInjectee;
 
@@ -63,7 +80,7 @@ namespace Covid19Track
 
 
         /* ---------  Constructor -------------- */
-        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance)
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Regions region)
         {
             this.CIN = cin.ToUpper();
             this.nom = nom.ToUpper();
@@ -71,6 +88,7 @@ namespace Covid19Track
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.etat = Etats.Inconnu;
             dosesInjectee = 0;
+            Region = region;
 
             Isolations = new List<Isolation>();
             RencontreDAO.FindAll(this);
@@ -85,7 +103,7 @@ namespace Covid19Track
             }
 
         }
-        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat)
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Regions region, Etats etat)
         {
             this.CIN = cin.ToUpper();
             this.nom = nom.ToUpper();
@@ -93,6 +111,8 @@ namespace Covid19Track
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.etat = etat;
             dosesInjectee = 0;
+            Region = region;
+
             Isolations = new List<Isolation>();
             RencontreDAO.FindAll(this);
             RecordDAO.FindAll(this);
@@ -106,7 +126,7 @@ namespace Covid19Track
                 CitoyenDAO.Create(this);
             }
         }
-        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat, byte doses)
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat, byte doses, Regions region)
         {
             this.CIN = cin.ToUpper();
             this.nom = nom.ToUpper();
@@ -114,6 +134,7 @@ namespace Covid19Track
             this.dateDeNaissance = DateTime.ParseExact(dateDeNaissance, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             this.etat = etat;
             dosesInjectee = doses;
+            Region = region;
 
 
             Isolations = new List<Isolation>();

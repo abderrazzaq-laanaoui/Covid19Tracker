@@ -36,10 +36,7 @@ namespace GraphicInterface
 
         }
 
-        private void View_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            TgBtn.IsChecked = false;
-        }
+      
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -52,6 +49,7 @@ namespace GraphicInterface
 
         }
 
+        /* Changing View */
         private void AccueilBtn_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new HomeVM();
@@ -74,5 +72,7 @@ namespace GraphicInterface
         {
             DataContext = new EtablisementVM();
         }
+
+        
     }
 }

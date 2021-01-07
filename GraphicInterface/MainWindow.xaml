@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:GraphicInterface"
         xmlns:viewmodles="clr-namespace:GraphicInterface.ViewModeles"
         xmlns:views="clr-namespace:GraphicInterface.Views"
-        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-        mc:Ignorable="d" ResizeMode="NoResize"
+         mc:Ignorable="d" ResizeMode="NoResize"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
         Title="Covid19Tracker" Height="800" Width="1100" >
     
