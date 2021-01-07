@@ -8,14 +8,39 @@
              mc:Ignorable="d" 
             d:DesignHeight="800" d:DesignWidth="1035">
     <Grid >
-        <Grid Margin="15,15,15,15" Height="700" VerticalAlignment="Top" HorizontalAlignment="Left" Width="1000"  >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+            <TextBlock Text="Evolution Des Etats Des Citoyens" FontSize="30" HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1" Height="400" Width="950" Grid.ColumnSpan="3" Grid.RowSpan="2"
+              VerticalAlignment="Top" HorizontalAlignment="Center"   >
             <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" >
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                    <lvc:Axis Title="Citoyens" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+                    <lvc:Axis Title="Temps" Labels="{Binding Labels}"></lvc:Axis>
                 </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="3"  Height="350" Width="950" HorizontalAlignment="Center" >
+            <lvc:CartesianChart Series="{Binding SeriesCollection2}" LegendLocation="Right"  >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Region" Labels="{Binding Labels2}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Citoyens Infecté" LabelFormatter="{Binding Formatter2}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </Grid>
     </Grid>
