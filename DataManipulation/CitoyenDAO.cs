@@ -13,9 +13,9 @@ namespace Covid19Track
             try
             {
                 Connection.Open();
-                Command.CommandText = "INSERT INTO `Citoyen` (`cin`, `prenom`, `nom`, `date`, `etat`, `doses`)" +
+                Command.CommandText = "INSERT INTO `Citoyen` (`cin`, `prenom`, `nom`, `date`, `region`,`etat`, `doses`)" +
                     $" VALUES ('{dto.CIN.ToUpper()}', '{dto.prenom.ToUpper()}', '{dto.nom.ToUpper()}'," +
-                    $" (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), '{(int)dto.Etat}', '{dto.DosesInjectee}')";
+                    $" (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), {(int)dto.Region}, '{(int)dto.Etat}', '{dto.DosesInjectee}')";
                 Command.Connection = Connection;
                 Command.ExecuteNonQuery();
 
@@ -26,7 +26,7 @@ namespace Covid19Track
             }
             finally
             {
-                if (Connection.State == System.Data.ConnectionState.Open)
+                if (Connection.State == ConnectionState.Open)
                     Connection.Close();
             }
             return dto;
@@ -75,7 +75,7 @@ namespace Covid19Track
 
                 if (Result.Read())
                     res = new Citoyen(Result[0].ToString(), Result[1].ToString(), Result[2].ToString(),
-                        DateTime.Parse(Result[3].ToString()).ToString("d"), (Etats)Int64.Parse(Result[4].ToString()));
+                        DateTime.Parse(Result[3].ToString()).ToString("d"), (Regions)int.Parse(Result[4].ToString()),(Etats)int.Parse(Result[5].ToString()));
             }
             catch (Exception ex)
             {
@@ -110,7 +110,8 @@ namespace Covid19Track
                         var c = new Citoyen(row[0].ToString(),
                            row[1].ToString(), row[2].ToString(),
                            DateTime.Parse(row[3].ToString()).ToString("d"),
-                           (Etats)int.Parse(row[4].ToString()), byte.Parse(row[5].ToString()));
+                           (Regions)int.Parse(row[4].ToString()),
+                           (Etats)int.Parse(row[5].ToString()), byte.Parse(row[6].ToString()));
                         citoyens.Add(c);
                     }
                 }
@@ -145,7 +146,7 @@ namespace Covid19Track
             }
             finally
             {
-                if (Connection.State == System.Data.ConnectionState.Open)
+                if (Connection.State == ConnectionState.Open)
                     Connection.Close();
             }
 
@@ -158,7 +159,7 @@ namespace Covid19Track
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
                 Command.CommandText = $"UPDATE Citoyen SET prenom = '{dto.prenom.ToUpper()}', nom = '{dto.nom.ToUpper()}'," +
-                    $" date = (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), " +
+                    $" date = (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), region = {(int) dto.Region}" +
                     $"etat = '{(int) dto.Etat}', doses = '{dto.DosesInjectee}' WHERE `cin` = '{dto.CIN}'; ";
                 Command.Connection = Connection;
                 Command.ExecuteNonQuery();

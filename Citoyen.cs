@@ -126,7 +126,7 @@ namespace Covid19Track
                 CitoyenDAO.Create(this);
             }
         }
-        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Etats etat, byte doses, Regions region)
+        public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Regions region,Etats etat, byte doses)
         {
             this.CIN = cin.ToUpper();
             this.nom = nom.ToUpper();
