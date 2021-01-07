@@ -8,5 +8,6 @@ namespace GraphicInterface.ViewModeles
 {
     public class StatestiquesVM
     {
+        
     }
 }
