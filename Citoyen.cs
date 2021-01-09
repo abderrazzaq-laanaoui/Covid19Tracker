@@ -12,7 +12,7 @@ using System.Timers;
 
 namespace Covid19Track
 {
-
+ 
     public enum Etats
     {
         Inconnu = 0,
@@ -220,4 +220,5 @@ namespace Covid19Track
             return Rencontres.Where(r => r.date >= dateDebut && r.date <= dateFin).ToList();
         }
     }
+
 }

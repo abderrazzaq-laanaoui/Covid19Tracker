@@ -1,4 +1,7 @@
-﻿using GraphicInterface.ViewModeles;
+﻿using Covid19Track;
+using GraphicInterface.ViewModeles;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -9,9 +12,13 @@ namespace GraphicInterface
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static List<Laboratoire> laboratoires { get; private set; }
+        public static List<CentreDeVaccination> centres { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            LoadData();
         }
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
@@ -36,7 +43,15 @@ namespace GraphicInterface
 
         }
 
-      
+
+        private static void LoadData()
+        {
+           
+            Citoyen.citoyens = CitoyenDAO.FindAll();
+            laboratoires = EtablisementDAO.FindAll(1).OfType<Laboratoire>().ToList();
+            centres = EtablisementDAO.FindAll(2).OfType<CentreDeVaccination>().ToList();
+
+        }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {

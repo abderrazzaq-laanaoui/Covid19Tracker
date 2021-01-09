@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Covid19Track;
 using System.Linq;
 
 namespace GraphicInterface.Views
@@ -47,24 +48,23 @@ namespace GraphicInterface.Views
             };
 
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
-             
-            //________
 
+            //________
+            RegionsdData(out int[] InfectedData, out int[] GueriData);
             SeriesCollection2 = new SeriesCollection
             {
                 new ColumnSeries
                 {
-                    Title = "Guerés",
+                    Title = "Guéris",
                     Fill = Brushes.Green,
-                    Values = new ChartValues<double> { 12, 30, 49, 60 , 123, 210, 160, 80,92, 71, 160, 94}
+                    Values = new ChartValues<double> { GueriData[0], GueriData[1], GueriData[2], GueriData[3], GueriData[4], GueriData[5], GueriData[6], GueriData[7], GueriData[8], GueriData[9], GueriData[10], GueriData[11] }
                 },
                 new ColumnSeries
                 {
                     Title = "Infectés",
                     Fill = Brushes.Red,
-                    Values = new ChartValues<double> { 10, 50, 39, 50 , 223, 120, 60, 98,112, 100, 60, 54}
-                }
-                
+                    Values = new ChartValues<int> { InfectedData[0], InfectedData[1], InfectedData[2], InfectedData[3], InfectedData[4], InfectedData[5], InfectedData[6], InfectedData[7], InfectedData[8], InfectedData[9], InfectedData[10], InfectedData[11]}
+                } 
             };
 
 
@@ -75,6 +75,23 @@ namespace GraphicInterface.Views
 
 
             DataContext = this;
+        }
+
+        private void RegionsdData(out int[] RegionsInfectedData, out int[] RegionsGueriData)
+        {
+            RegionsInfectedData = new int[12];
+            RegionsGueriData = new int[12];
+            for(int i = 0; i < RegionsInfectedData.Length; i++)
+            {
+                RegionsInfectedData[i] =  Covid19Track.Citoyen.citoyens.Where(c => c.Region.Equals((Regions)i))
+                                                                       .Where(c => c.Etat.Equals(Etats.Infecte))
+                                                                       .Count();
+                /*-|        -|*/
+                RegionsGueriData[i] =  Covid19Track.Citoyen.citoyens.Where(c => c.Region.Equals((Regions)i))
+                                                                    .Where(c => c.Etat.Equals(Etats.Saint))
+                                                                    .Where(c => c.Records.ElementAt(c.Records.Count - 2).Equals(Etats.Infecte))
+                                                                    .Count();
+            }
         }
     }
 }
