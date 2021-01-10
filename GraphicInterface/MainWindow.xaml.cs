@@ -18,9 +18,11 @@ namespace GraphicInterface
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void Window_ContentRendered(object sender, System.EventArgs e)
+        {
             LoadData();
         }
-
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
             //ToolTip visiblity

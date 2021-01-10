@@ -98,7 +98,7 @@ namespace Covid19Track
             {
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = "SELECT * FROM `Citoyen`";
+                Command.CommandText = "SELECT  * FROM `Citoyen`";
                 Command.Connection = Connection;
                 using (var reader = Command.ExecuteReader())
                 {

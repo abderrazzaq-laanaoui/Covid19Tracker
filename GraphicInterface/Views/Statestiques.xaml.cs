@@ -87,10 +87,10 @@ namespace GraphicInterface.Views
                                                                        .Where(c => c.Etat.Equals(Etats.Infecte))
                                                                        .Count();
                 /*-|        -|*/
-                RegionsGueriData[i] =  Covid19Track.Citoyen.citoyens.Where(c => c.Region.Equals((Regions)i))
-                                                                    .Where(c => c.Etat.Equals(Etats.Saint))
-                                                                    .Where(c => c.Records.ElementAt(c.Records.Count - 2).Equals(Etats.Infecte))
-                                                                    .Count();
+                //RegionsGueriData[i] =  Covid19Track.Citoyen.citoyens.Where(c => c.Region.Equals((Regions)i))
+                //                                                    .Where(c => c.Etat.Equals(Etats.Saint))
+                //                                                    .Where(c => c.Records.ElementAt(c.Records.Count - 2).Equals(Etats.Infecte))
+                //                                                    .Count();
             }
         }
     }

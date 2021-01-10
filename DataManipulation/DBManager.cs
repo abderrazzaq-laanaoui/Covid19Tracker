@@ -18,7 +18,11 @@ namespace Covid19Track.DataManipulation
         {
             try
             {
+                //Online
                 cnxStr = "Server=95.217.200.204;Database=lmastran_Covid19Tracker;Uid=lmastran_Covid19Admin;Pwd=projet@2020;";
+                //Local
+                //cnxStr = "Server=localhost;Database=lmastran_Covid19Tracker;Uid=root;Pwd=;";
+
                 Connection = new MySqlConnection(cnxStr);
                 Cnx = new MySqlConnection(cnxStr);
                 Command = new MySqlCommand();

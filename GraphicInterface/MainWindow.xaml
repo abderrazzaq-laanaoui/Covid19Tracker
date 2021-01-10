@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:GraphicInterface.Views"
          mc:Ignorable="d" ResizeMode="NoResize"
         WindowStyle="None" WindowStartupLocation="CenterScreen"
-        Title="Covid19Tracker" Height="800" Width="1100" >
+        Title="Covid19Tracker" Height="800" Width="1100" ContentRendered="Window_ContentRendered" >
     
     <Window.Resources>
         <!--change toggle button--> 
