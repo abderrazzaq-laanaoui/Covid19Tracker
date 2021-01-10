@@ -9,9 +9,9 @@
             d:DesignHeight="800" d:DesignWidth="1035">
     <Grid >
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -45,6 +45,12 @@
                     <lvc:Axis Title="Citoyens Infecté" LabelFormatter="{Binding Formatter2}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Button x:Name="GlobalBtn" Content="Global" FontWeight="Bold"/>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Button x:Name="TodayBtn" Content="Jour" FontWeight="Bold"/>
         </Grid>
     </Grid>
 

@@ -5,8 +5,141 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GraphicInterface.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red">
-            
+            d:DesignHeight="800" d:DesignWidth="1035">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
+
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--TITRE INFOS-->
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock Text="Informations Personelles" FontSize="30" HorizontalAlignment="Center"/>
+        </Grid>
+        <!--CIN-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock Margin="50,0,0,0" Text="C.I.N : " FontSize="20" VerticalAlignment="Center"/>
+            <ComboBox IsEditable="True" VerticalAlignment="Center"
+                  Width="250"
+                  Height="25"
+                  IsTextSearchEnabled="False"
+                  x:Name="cb"
+                  ItemsSource="{Binding ItemList}"
+                  Text="{Binding SearchTextText}">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+
+        </Grid>
+        <!--NOM-->
+        <Grid Grid.Row="2" Grid.Column="0" Margin="0,10,0,0">
+            <TextBlock  Margin="30,0,0,0" Text="Nom : " FontSize="16"/>
+            <TextBox x:Name="NomBox" FontSize="16" Height="25" VerticalAlignment="Bottom" Width="200" IsReadOnly="True" />
+        </Grid>
+        <!--PRENOM-->
+        <Grid Grid.Row="2" Grid.Column="1" Margin="0,10,0,0">
+            <TextBlock  Margin="30,0,0,0" Text="Prenom : " FontSize="16"/>
+            <TextBox x:Name="PrenomBox" FontSize="16" Height="25" VerticalAlignment="Bottom" Width="200" IsReadOnly="True"/>
+        </Grid>
+        <!--DDN-->
+        <Grid Grid.Row="3" Grid.Column="0" Margin="0,10,0,0">
+            <TextBlock  Margin="30,0,0,0" Text="Date De Naissance : " FontSize="16"/>
+            <DatePicker x:Name="DateBox" Text="" FontSize="14" Height="25" VerticalAlignment="Bottom" Width="200"  IsEnabled="False"/>
+        </Grid>
+        <!--REGION-->
+        <Grid Grid.Row="3" Grid.Column="1" Margin="0,10,0,0">
+            <TextBlock  Margin="30,0,0,0" Text="Region : " FontSize="16"/>
+            <ComboBox Name="RegionBox" Width="200"  Height="25" VerticalAlignment="Bottom" IsEnabled="False" >
+                <ComboBoxItem Content="Tangier_Tetouan_Al Hociema" FontSize="14"/>
+                <ComboBoxItem Content="Oriental" FontSize="14"/>
+                <ComboBoxItem Content="Fez_Meknes" FontSize="14"/>
+                <ComboBoxItem Content="Rabat_Sale_Kenitra" FontSize="14"/>
+                <ComboBoxItem Content="Beni Mellal_Khenifra" FontSize="14"/>
+                <ComboBoxItem Content="CasaBlanca_Settat" FontSize="14"/>
+                <ComboBoxItem Content="Marrakesh_Safi" FontSize="14"/>
+                <ComboBoxItem Content="Draa_Tafilalt" FontSize="14"/>
+                <ComboBoxItem Content="Sous_Massa" FontSize="14"/>
+                <ComboBoxItem Content="Guelmim_OuedNoun" FontSize="14"/>
+                <ComboBoxItem Content="Laayoune_Sakia ElHamra" FontSize="14"/>
+                <ComboBoxItem Content="Dakhla_Oued Eddahab" FontSize="14"/>
+            </ComboBox>
+        </Grid>
+        <!--Doses-->
+        <Grid Grid.Row="4" Grid.Column="0" Margin="0,10,0,0">
+            <TextBlock  Margin="30,0,0,0" Text="Doses Injectées : " FontSize="16"/>
+            <TextBox Name="DosesBox" MaxLength="1" PreviewTextInput="NumberValidationTextBox" Width="200"  Height="25" VerticalAlignment="Bottom" IsReadOnly="True"/>
+        </Grid>
+        <!--ETAT-->
+        <Grid Grid.Row="4" Grid.Column="1" Margin="0,10,0,0">
+            <TextBlock  Margin="30,0,0,0" Text="Etat : " FontSize="16"/>
+            <ComboBox Name="EtatBox" Width="200"  Height="25" VerticalAlignment="Bottom" IsEnabled="False" >
+                <ComboBoxItem Content="Inconnu" FontSize="14"/>
+                <ComboBoxItem Content="Sain" FontSize="14"/>
+                <ComboBoxItem Content="Soupçonné" FontSize="14"/>
+                <ComboBoxItem Content="Infecté" FontSize="14"/>
+                <ComboBoxItem Content="Vacciné" FontSize="14"/>
+                <ComboBoxItem Content="Decedé" FontSize="14"/>
+            </ComboBox>
+        </Grid>
+        <!-- TITRE OPERATIONS -->
+        <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" >
+            <TextBlock Text=" OPERATIONS " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Image Source="{Binding QRImg}" Width="210" Height="210" />
+        </Grid>
+        <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" >
+                <Button Height="40" Width="200" />
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1" >
+                <Button Height="40" Width="200" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" >
+                <Button Height="40" Width="200" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" >
+                <Button Height="40" Width="200" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2" Height="35" TextElement.FontSize="20" Grid.ColumnSpan="2">
+            <ComboBox  Width="200" >
+                <ComboBoxItem Content="Records" FontSize="20" IsSelected="True"/>
+                <ComboBoxItem Content="Testes" FontSize="20"/>
+                <ComboBoxItem Content="Rencontres" FontSize="20" />
+                <ComboBoxItem Content="Isolations" FontSize="20" />
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2" Height="35" TextElement.FontSize="20" Grid.ColumnSpan="2">
+            <ComboBox  Width="200" >
+                <ComboBoxItem Content="Records" FontSize="20" IsSelected="True"/>
+                <ComboBoxItem Content="Testes" FontSize="20"/>
+                <ComboBoxItem Content="Rencontres" FontSize="20" />
+            </ComboBox>
+        </Grid>
+
     </Grid>
 </UserControl>
