@@ -42,7 +42,6 @@ namespace Covid19Track
             {
                 etat = value;
                 CitoyenDAO.Update(this);
-
             }
         }
         public byte DosesInjectee
@@ -115,7 +114,6 @@ namespace Covid19Track
             this.etat = etat;
             dosesInjectee = doses;
 
-
             Isolations = new List<Isolation>();
             RencontreDAO.FindAll(this);
             RecordDAO.FindAll(this);
@@ -124,9 +122,7 @@ namespace Covid19Track
             citoyens.Add(this);
 
             if (!CitoyenDAO.Excist(cin))
-            {
                 CitoyenDAO.Create(this);
-            }
 
         }
 

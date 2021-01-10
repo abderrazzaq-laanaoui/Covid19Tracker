@@ -22,7 +22,7 @@ namespace Covid19Track
                     Command.CommandText = "INSERT INTO `Etablisement` (`reference`, `nom`, `type`)" +
                     $" VALUES ('{((CentreDeVaccination)dto).reference.ToUpper()}', '{((CentreDeVaccination)dto).nom.ToUpper()}', '2')";
                 }
-                if (Connection.State != System.Data.ConnectionState.Open)
+                if (Connection.State != ConnectionState.Open)
                     Connection.Open();
                 Command.Connection = Connection;
                 Command.ExecuteNonQuery();

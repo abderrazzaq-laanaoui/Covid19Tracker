@@ -44,8 +44,7 @@ namespace Covid19Track
                 Command.Connection = Cnx;
                 int R = Convert.ToInt32(Command.ExecuteScalar());
                 res = R != 0;
-
-                
+  
             }
             catch (Exception ex)
             {
@@ -59,7 +58,6 @@ namespace Covid19Track
             }
             return res;
         }
-
 
         public static Citoyen Find(string cin)
         {
