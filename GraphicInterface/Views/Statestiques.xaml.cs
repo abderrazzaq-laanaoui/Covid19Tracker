@@ -37,13 +37,15 @@ namespace GraphicInterface.Views
                     Title = "Series 2",
                     Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
                     PointGeometry = DefaultGeometries.Square,
+                    PointGeometrySize = 10
+
                 },
                 new LineSeries
                 {
                     Title = "Series 3",
                     Values = new ChartValues<double> { 4,2,7,2,7 },
-                    PointGeometry = DefaultGeometries.Square,
-                    PointGeometrySize = 1
+                    PointGeometry = DefaultGeometries.Triangle,
+                    PointGeometrySize = 10
                 }
             };
 
@@ -85,6 +87,10 @@ namespace GraphicInterface.Views
             {
                 RegionsInfectedData[i] =  Covid19Track.Citoyen.citoyens.Where(c => c.Region.Equals((Regions)i))
                                                                        .Where(c => c.Etat.Equals(Etats.Infecte))
+                                                                       .Count();
+                //TODO
+                RegionsGueriData[i] = Covid19Track.Citoyen.citoyens.Where(c => c.Region.Equals((Regions)i))
+                                                                       .Where(c => c.Etat.Equals(Etats.Saint))
                                                                        .Count();
                 /*-|        -|*/
                 //RegionsGueriData[i] =  Covid19Track.Citoyen.citoyens.Where(c => c.Region.Equals((Regions)i))

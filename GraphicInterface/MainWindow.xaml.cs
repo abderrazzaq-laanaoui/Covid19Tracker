@@ -18,6 +18,7 @@ namespace GraphicInterface
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new HomeVM();
         }
         private void Window_ContentRendered(object sender, System.EventArgs e)
         {

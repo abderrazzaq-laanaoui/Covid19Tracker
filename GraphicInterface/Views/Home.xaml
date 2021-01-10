@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:GraphicInterface.Views"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1035">
-    <Grid Background="Green">
-            
+    <Grid Background="#1B1464">
+        <Image Source="pack://application:,,,/Assets/Images/home.png" Stretch="Fill"/>
+
     </Grid>
 </UserControl>
