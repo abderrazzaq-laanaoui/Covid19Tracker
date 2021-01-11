@@ -1,19 +1,18 @@
 ﻿using Covid19Track;
+using QRCoder;
 using System;
-using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Color = System.Drawing.Color;
 
 namespace GraphicInterface.Views
 {
@@ -22,69 +21,180 @@ namespace GraphicInterface.Views
     /// </summary>
     public partial class CitoyenV : UserControl
     {
-        private ComboBox cb;
+   
         public CitoyenV()
         {
             InitializeComponent();
-
-            cb = (ComboBox)this.FindName("CINList");
-            cb.ItemsSource = Citoyen.citoyens.Select(c => c.CIN).ToList();
+            CINList.ItemsSource = Citoyen.citoyens.Select(c => c.CIN).ToList();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
-            
+
         }
 
         private void CINList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cb.SelectedItem != null)
+            if (CINList.SelectedItem != null)
             {
-              
-                FillData(Citoyen.citoyens.First(c => c.CIN.Equals(cb.SelectedItem)));
-
+                FillData(Citoyen.citoyens.First(c => c.CIN.Equals(CINList.SelectedItem)));
             }
             else
             {
                 RemoveData();
-
-
             }
 
         }
         private void FillData(Citoyen citoyen)
         {
-            ((TextBox)this.FindName("NomBox")).Text = citoyen.nom;
-            ((TextBox)this.FindName("PrenomBox")).Text = citoyen.prenom;
-            ((TextBox)this.FindName("DosesBox")).Text = citoyen.DosesInjectee.ToString();
-            ((DatePicker)this.FindName("DateBox")).Text = citoyen.dateDeNaissance.ToShortDateString();
-            ((ComboBox)this.FindName("RegionBox")).SelectedIndex = (int)citoyen.Region;
-            ((ComboBox)this.FindName("EtatBox")).SelectedIndex = (int)citoyen.Etat;
-            ((ComboBox)this.FindName("RegionBox")).SelectedIndex = (int)citoyen.Region;
+            NomBox.Text = citoyen.nom;
+            PrenomBox.Text = citoyen.prenom;
+            DosesBox.Text = citoyen.DosesInjectee.ToString();
+            DateBox.Text = citoyen.dateDeNaissance.ToShortDateString();
+            RegionBox.SelectedIndex = (int)citoyen.Region;
+            EtatBox.SelectedIndex = (int)citoyen.Etat;
 
-            ((Button)this.FindName("O1Btn")).IsEnabled = true;
-            ((Button)this.FindName("O2Btn")).IsEnabled = true;
-            ((Button)this.FindName("O3Btn")).IsEnabled = true;
-            ((Button)this.FindName("O4Btn")).IsEnabled = true;
+            O1Btn.IsEnabled = true;
+            O2Btn.IsEnabled = true;
+            O3Btn.IsEnabled = true;
+            O4Btn.IsEnabled = true;
 
+            SetQRCode(citoyen);
         }
         private void RemoveData()
         {
-            ((TextBox)this.FindName("NomBox")).Text = String.Empty;
-            ((TextBox)this.FindName("PrenomBox")).Text = String.Empty;
-            ((TextBox)this.FindName("DosesBox")).Text = String.Empty;
-            ((DatePicker)this.FindName("DateBox")).Text = String.Empty;
-            ((ComboBox)this.FindName("RegionBox")).SelectedIndex = -1;
-            ((ComboBox)this.FindName("EtatBox")).SelectedIndex = -1;
-            ((ComboBox)this.FindName("RegionBox")).SelectedIndex = -1;
+            
+            NomBox.Text = string.Empty;
+            PrenomBox.Text = string.Empty;
+            DosesBox.Text = string.Empty;
+            DateBox.Text = string.Empty;
+            RegionBox.SelectedIndex = -1;
+            EtatBox.SelectedIndex = -1;
 
-            ((Button)this.FindName("O1Btn")).IsEnabled = false;
-            ((Button)this.FindName("O2Btn")).IsEnabled = false;
-            ((Button)this.FindName("O3Btn")).IsEnabled = false;
-            ((Button)this.FindName("O4Btn")).IsEnabled = false;
+            O1Btn.IsEnabled = false;
+            O2Btn.IsEnabled = false;
+            O3Btn.IsEnabled = false;
+            O4Btn.IsEnabled = false;
 
         }
+        private void SetQRCode(Citoyen citoyen)
+        {
+            Color color;
+            // Deciding the color
+            if (citoyen.Etat == Etats.Infecte)
+                color = Color.Red;
+            else if (citoyen.Etat == Etats.Vaccine)
+                color = Color.Green;
+            else if (citoyen.Etat == Etats.Saint)
+                color = Color.Lime;
+            else if (citoyen.Etat == Etats.Soupconne)
+                color = Color.Orange;
+            else if (citoyen.Etat == Etats.Inconnu)
+                color = Color.Gray;
+            else
+                color = Color.Black;
+
+
+            QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
+            QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(citoyen.ConsultationEtat(),QRCodeGenerator.ECCLevel.Q);
+            QRCode qRCode = new QRCode(qRCodeData);
+            Bitmap qrCodeImg  = qRCode.GetGraphic(20,color,Color.White,true);
+            QRImage.Source = Bitmap2imageSource(qrCodeImg);
+
+        }
+
+       
+        private ImageSource Bitmap2imageSource(Bitmap bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+
+                return bitmapImage;
+            }
+        }
+
+        private void O1Btn_Click(object sender, RoutedEventArgs e)
+        {
+            var tmpC = Citoyen.citoyens.First(c => c.CIN == CINList.SelectedItem.ToString());
+            var centreDialog = new CentreDialogV();
+            centreDialog.Owner = (Window)this.Parent;
+            string r = string.Empty;
+            if (centreDialog.ShowDialog() == true)
+                r = centreDialog.Result();
+
+            if (!string.IsNullOrEmpty(r))
+            {
+                 CentreDeVaccination.centres.First(l => l.reference == r).InjecteDose(tmpC);
+                string message;
+                if(tmpC.DosesInjectee == 1)
+                {
+                    message = "1er dose de vaccine bien injectée ";
+                }
+                else
+                {
+                    message = "Citoyen Bien Vaccinner ";
+                }
+                MessageBox.Show(message);
+                FillData(tmpC);
+                
+
+            }
+        }
+
+        private void O2Btn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void O3Btn_Click(object sender, RoutedEventArgs e)
+        {
+            var This = Citoyen.citoyens.First(c => c.CIN == CINList.SelectedItem.ToString());
+            var citoyenDialog = new  CitoyenDialogV();
+            citoyenDialog.Owner = (Window)this.Parent;
+            string r = string.Empty;
+            if (citoyenDialog.ShowDialog() == true)
+                r = citoyenDialog.Result();
+            if (!string.IsNullOrEmpty(r))
+            {
+                var Other = Citoyen.citoyens.First(c => c.CIN == r);
+                This.Contacter(Other);
+                MessageBox.Show($"{This.nom} {This.prenom} à bien contacter {Other.nom} {Other.prenom}");
+
+
+            }
+        }
+        private void O4Btn_Click(object sender, RoutedEventArgs e)
+        {
+            var tmpC = Citoyen.citoyens.First(c => c.CIN == CINList.SelectedItem.ToString());
+            var laboDialog = new LaboDialogV();
+            laboDialog.Owner = (Window)this.Parent;
+            string r = string.Empty;
+            if (laboDialog.ShowDialog() == true)
+                r = laboDialog.Result();
+
+            if (!string.IsNullOrEmpty(r))
+            {
+                bool resultatTest = Laboratoire.laboratoires.First(l => l.reference == r).TestPCR(tmpC);
+                string resultatText;
+                if (resultatTest)
+                    resultatText = "Postive";
+                else
+                    resultatText = "Negative";
+
+                MessageBox.Show("Resultat de test est " + resultatText,"Information !",MessageBoxButton.OK);
+                FillData(tmpC);
+
+            }
+        }
+        
     }
 }

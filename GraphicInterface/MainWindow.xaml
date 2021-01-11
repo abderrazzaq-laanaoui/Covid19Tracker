@@ -105,18 +105,19 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <!--Nav Menu-->
-            <Grid x:Name="SideNav"
+            <Canvas Panel.ZIndex="100">
+                <!--Nav Menu-->
+                <Grid x:Name="SideNav"
                   HorizontalAlignment="Left"
                   Width="65"
                   Background="#2E333A"
                   Grid.Column="0">
-                
-                <StackPanel x:Name="StPanel">
-                    <!--Menu Toggler--> 
-                    <Grid Height="90">
-                        <!--Menu title Text-->
-                        <TextBlock Grid.Row="1" Grid.Column="0"
+
+                    <StackPanel x:Name="StPanel">
+                        <!--Menu Toggler-->
+                        <Grid Height="90">
+                            <!--Menu title Text-->
+                            <TextBlock Grid.Row="1" Grid.Column="0"
                                    Margin="72,-20,0,0"
                                    Text="M E N U"
                                    Foreground="White"
@@ -126,214 +127,216 @@
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Style="{StaticResource font_style}">
-                            
-                            <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="10"
+
+                                <TextBlock.Effect>
+                                    <DropShadowEffect BlurRadius="10"
                                                   ShadowDepth="1"
                                                   Direction="-90"
                                                   Color="White"/>
-                            </TextBlock.Effect>
-                            
-                        </TextBlock>
-                        <ToggleButton x:Name="TgBtn" Grid.Column="0"
+                                </TextBlock.Effect>
+
+                            </TextBlock>
+                            <ToggleButton x:Name="TgBtn" Grid.Column="0"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
                                       Margin="14,-20,0,0" BorderThickness="0" 
                                       Height="35" Width="35" 
                                       Style="{StaticResource tb_style}">
 
-                            <ToggleButton.Background>
-                                <ImageBrush ImageSource="pack://application:,,,/Assets/Images/tgBtn_default.png"></ImageBrush>
-                            </ToggleButton.Background>
+                                <ToggleButton.Background>
+                                    <ImageBrush ImageSource="pack://application:,,,/Assets/Images/tgBtn_default.png"></ImageBrush>
+                                </ToggleButton.Background>
 
-                            <ToggleButton.Triggers>
-                                <!--Menu Hide-->
-                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="HideStPanel">
-                                            <DoubleAnimation Storyboard.TargetName="SideNav"
+                                <ToggleButton.Triggers>
+                                    <!--Menu Hide-->
+                                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="HideStPanel">
+                                                <DoubleAnimation Storyboard.TargetName="SideNav"
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0" Duration="0:0:0.2"
                                                              From="230" To="65">
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <!--Menu Show-->
-                                <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                    <BeginStoryboard>
-                                        <Storyboard x:Name="ShowStPanel">
-                                            <DoubleAnimation Storyboard.TargetName="SideNav"
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <!--Menu Show-->
+                                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                        <BeginStoryboard>
+                                            <Storyboard x:Name="ShowStPanel">
+                                                <DoubleAnimation Storyboard.TargetName="SideNav"
                                                              Storyboard.TargetProperty="Width"
                                                              BeginTime="0:0:0" Duration="0:0:0.3"
                                                              From="65" To="230">
-                                            </DoubleAnimation>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </ToggleButton.Triggers>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ToggleButton.Triggers>
 
-                        </ToggleButton>
-                    </Grid>
-                    
-                    <!--Menu List Items-->
-                    <ListView x:Name="LV"
+                            </ToggleButton>
+                        </Grid>
+
+                        <!--Menu List Items-->
+                        <ListView x:Name="LV"
                               Background="Transparent"
                               BorderBrush="Transparent"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <!--Accueil-->
-                        <ListViewItem HorizontalAlignment="Left"
+                            <!--Accueil-->
+                            <ListViewItem HorizontalAlignment="Left"
                                       Margin="3,0,0,15" MouseEnter="ListViewItem_MouseEnter">
-                            <StackPanel Orientation="Horizontal"
+                                <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Button x:Name="AccueilBtn"
+                                    <Button x:Name="AccueilBtn"
                                     Height="auto" Width="45"
                                     Style="{StaticResource BtnStyle}" Click="AccueilBtn_Click">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="Assets/Images/img_home.png" />
-                                    </Button.Background>
-                                </Button>
-                                <TextBlock Text="Accueil" 
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="Assets/Images/img_home.png" />
+                                        </Button.Background>
+                                    </Button>
+                                    <TextBlock Text="Accueil" 
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_home"
+                                </StackPanel>
+                                <ListViewItem.ToolTip>
+                                    <ToolTip x:Name="tt_home"
                                          Content="Accueil"
                                          Style="{StaticResource tt_style}"/>
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
-                        <!--statestiques-->
-                        <ListViewItem HorizontalAlignment="Left"
+                                </ListViewItem.ToolTip>
+                            </ListViewItem>
+                            <!--statestiques-->
+                            <ListViewItem HorizontalAlignment="Left"
                                       Margin="3,0,0,15" MouseEnter="ListViewItem_MouseEnter">
-                            <StackPanel Orientation="Horizontal"
+                                <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Button x:Name="statestiquesBtn"
+                                    <Button x:Name="statestiquesBtn"
                                     Height="auto" Width="45"
                                     Style="{StaticResource BtnStyle}" Click="statestiquesBtn_Click">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="Assets/Images/img_stat.png" />
-                                    </Button.Background>
-                                </Button>
-                                <TextBlock Text="Statestiques" 
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="Assets/Images/img_stat.png" />
+                                        </Button.Background>
+                                    </Button>
+                                    <TextBlock Text="Statestiques" 
                                            Margin="18,0,0,0"
                                            Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_stat"
+                                </StackPanel>
+                                <ListViewItem.ToolTip>
+                                    <ToolTip x:Name="tt_stat"
                                          Content="Statestiques"
                                          Style="{StaticResource tt_style}"/>
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
-                        <!--Citoyens-->
-                        <ListViewItem HorizontalAlignment="Left"
+                                </ListViewItem.ToolTip>
+                            </ListViewItem>
+                            <!--Citoyens-->
+                            <ListViewItem HorizontalAlignment="Left"
                                       Margin="3,0,0,15" MouseEnter="ListViewItem_MouseEnter">
-                            <StackPanel Orientation="Horizontal"
+                                <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Button x:Name="CitoyenBtn"
+                                    <Button x:Name="CitoyenBtn"
                                     Height="auto" Width="45"
                                     Style="{StaticResource BtnStyle}" Click="CitoyenBtn_Click">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="Assets/Images/img_citoyen.png" />
-                                    </Button.Background>
-                                </Button>
-                                <TextBlock Text="Citoyens" 
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="Assets/Images/img_citoyen.png" />
+                                        </Button.Background>
+                                    </Button>
+                                    <TextBlock Text="Citoyens" 
                                            Margin="18,0,0,0"
                                            Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_citoyen"
+                                </StackPanel>
+                                <ListViewItem.ToolTip>
+                                    <ToolTip x:Name="tt_citoyen"
                                          Content="Citoyens"
                                          Style="{StaticResource tt_style}"/>
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
-                        <!--Etablisments-->
-                        <ListViewItem HorizontalAlignment="Left"
+                                </ListViewItem.ToolTip>
+                            </ListViewItem>
+                            <!--Etablisments-->
+                            <ListViewItem HorizontalAlignment="Left"
                                       Margin="2,0,0,15" MouseEnter="ListViewItem_MouseEnter">
-                            <StackPanel Orientation="Horizontal" Width="230">
-                                <Button x:Name="EtablismentBtn"
+                                <StackPanel Orientation="Horizontal" Width="230">
+                                    <Button x:Name="EtablismentBtn"
                                     Height="auto" Width="45"
                                     Style="{StaticResource BtnStyle}" Click="EtablismentBtn_Click">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="Assets/Images/img_etablisment.png" />
-                                    </Button.Background>
-                                </Button>
-                                <TextBlock Text="Etablisments" 
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="Assets/Images/img_etablisment.png" />
+                                        </Button.Background>
+                                    </Button>
+                                    <TextBlock Text="Etablisments" 
                                            Margin="18,0,0,0"
                                            Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_etablisment"
+                                </StackPanel>
+                                <ListViewItem.ToolTip>
+                                    <ToolTip x:Name="tt_etablisment"
                                          Content="Etablisments"
                                          Style="{StaticResource tt_style}"/>
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
-                        <!--Exit-->
-                        <ListViewItem HorizontalAlignment="Left"
+                                </ListViewItem.ToolTip>
+                            </ListViewItem>
+                            <!--Exit-->
+                            <ListViewItem HorizontalAlignment="Left"
                                       Margin="3,385,0,15"  MouseEnter="ListViewItem_MouseEnter">
 
-                            <StackPanel Orientation="Horizontal"
+                                <StackPanel Orientation="Horizontal"
                                         Width="230">
-                                <Button x:Name="CloseBtn"
+                                    <Button x:Name="CloseBtn"
                                     Height="auto"
                                     Width="40" Click="CloseBtn_Click"
                                         Style="{StaticResource BtnStyle}">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="Assets/Images/img_exit.png" />
-                                    </Button.Background>
-                                </Button>
-                                <TextBlock Text="Exit" 
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="Assets/Images/img_exit.png" />
+                                        </Button.Background>
+                                    </Button>
+                                    <TextBlock Text="Exit" 
                                            Margin="18,0,0,0"
                                            Style="{StaticResource font_style}"/>
-                            </StackPanel>
-                            <ListViewItem.ToolTip>
-                                <ToolTip x:Name="tt_exit"
+                                </StackPanel>
+                                <ListViewItem.ToolTip>
+                                    <ToolTip x:Name="tt_exit"
                                          Content="Exit"
                                          Style="{StaticResource tt_style}"/>
-                            </ListViewItem.ToolTip>
-                        </ListViewItem>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <Border x:Name="Bd"
+                                </ListViewItem.ToolTip>
+                            </ListViewItem>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                <Border x:Name="Bd"
                                                     Height="50"
                                                     BorderBrush="{TemplateBinding BorderBrush}"
                                                     BorderThickness="{TemplateBinding BorderThickness}"
                                                     Padding="{TemplateBinding Padding}"
                                                     Background="{TemplateBinding Background}"
                                                     SnapsToDevicePixels="True">
-                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                                                   VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="IsMouseOver" Value="True"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <Setter Property="Background"
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Background"
                                                             TargetName="Bd"
                                                             Value="#404D5B"/>
-                                                    <Setter Property="BorderBrush"
+                                                        <Setter Property="BorderBrush"
                                                             TargetName="Bd"
                                                             Value="#404D5B"/>
 
-                                                </MultiTrigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
-                </StackPanel>
-                
-            </Grid>
-            
+                                                    </MultiTrigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </StackPanel>
+
+                </Grid>
+            </Canvas>
+
+            <ContentControl x:Name="View"  Grid.Column="1" Content="{Binding}" PreviewMouseDown="View_PreviewMouseDown" Margin="65,0,0,0" />
+         
             <!--View-->
-            <ContentControl x:Name="View" Grid.Column="1" Content="{Binding}"/>
         </Grid>
         
         

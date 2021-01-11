@@ -109,16 +109,16 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" >
-                <Button x:Name="O1Btn"  Height="40" Width="200" Content="Injecté une dose de Vaccine" IsEnabled="False"/>
+                <Button x:Name="O1Btn"  Height="40" Width="200" Content="Injecté une dose de Vaccine" IsEnabled="False" Click="O1Btn_Click"/>
             </Grid>
             <Grid Grid.Row="0" Grid.Column="1" >
-                <Button x:Name="O2Btn"   Height="40" Width="200" Content="Se faire Isoler" IsEnabled="False" />
+                <Button x:Name="O2Btn"   Height="40" Width="200" Content="Se faire Isoler" IsEnabled="False" Click="O2Btn_Click" />
             </Grid>
             <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" >
-                <Button x:Name="O3Btn"   Height="40" Width="200" Content="Rencontrer avec autre Citoyen"  IsEnabled="False"/>
+                <Button x:Name="O3Btn"   Height="40" Width="200" Content="Rencontrer avec autre Citoyen"  IsEnabled="False" Click="O3Btn_Click"/>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" >
-                <Button x:Name="O4Btn"  Height="40" Width="200" Content="Faire un Test PCR" IsEnabled="False"/>
+                <Button x:Name="O4Btn"  Height="40" Width="200" Content="Faire un Test PCR" IsEnabled="False" Click="O4Btn_Click"/>
             </Grid>
         </Grid>
         <!-- TITRE QR CODE -->
@@ -127,9 +127,7 @@
         </Grid>
         <!-- QR CODE -->
         <Grid Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <Border BorderThickness="10" BorderBrush="White">
-                <Image Source="{Binding QRImg}" Width="210" Height="210" />
-            </Border>
+                <Image x:Name="QRImage"  Width="210" Height="210" />
         </Grid>
         <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
             <TextBlock Text="Enregistrements" FontSize="30" HorizontalAlignment="Center"/>
@@ -147,4 +145,6 @@
         </Grid>
 
     </Grid>
+    
+    
 </UserControl>

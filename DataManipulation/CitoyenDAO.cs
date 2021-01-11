@@ -160,7 +160,7 @@ namespace Covid19Track
                 if (Connection.State != ConnectionState.Open)
                     Connection.Open();
                 Command.CommandText = $"UPDATE Citoyen SET prenom = '{dto.prenom.ToUpper()}', nom = '{dto.nom.ToUpper()}'," +
-                    $" date = (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), region = {(int) dto.Region}" +
+                    $" date = (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), region = '{(int) dto.Region}'," +
                     $"etat = '{(int) dto.Etat}', doses = '{dto.DosesInjectee}' WHERE `cin` = '{dto.CIN}'; ";
                 Command.Connection = Connection;
                 Command.ExecuteNonQuery();

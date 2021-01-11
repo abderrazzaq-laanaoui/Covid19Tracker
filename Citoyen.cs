@@ -67,7 +67,10 @@ namespace Covid19Track
             get => dosesInjectee;
             set
             {
-                dosesInjectee = value;
+                if (value == 2)
+                    this.etat = Etats.Vaccine;
+                dosesInjectee = (byte)(value % 2);
+                
                 CitoyenDAO.Update(this);
             }
         }

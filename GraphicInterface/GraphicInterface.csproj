@@ -43,8 +43,12 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,17 +68,29 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModeles\CitoyenVM.cs" />
+    <Compile Include="ViewModeles\Dialog\CitoyenDialogVM.cs" />
     <Compile Include="ViewModeles\EtablisementVM.cs" />
     <Compile Include="ViewModeles\HomeVM.cs" />
+    <Compile Include="ViewModeles\Dialog\CentreDialogVM.cs" />
+    <Compile Include="ViewModeles\Dialog\LaboDialogVM.cs" />
     <Compile Include="ViewModeles\StatestiquesVM.cs" />
     <Compile Include="Views\CitoyenV.xaml.cs">
       <DependentUpon>CitoyenV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\CitoyenDialogV.xaml.cs">
+      <DependentUpon>CitoyenDialogV.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EtablisementV.xaml.cs">
       <DependentUpon>EtablisementV.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeV.xaml.cs">
       <DependentUpon>HomeV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\CentreDialogV .xaml.cs">
+      <DependentUpon>CentreDialogV .xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\LaboDialogV.xaml.cs">
+      <DependentUpon>LaboDialogV.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatestiquesV.xaml.cs">
       <DependentUpon>StatestiquesV.xaml</DependentUpon>
@@ -95,11 +111,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialog\CitoyenDialogV.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\EtablisementV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\CentreDialogV .xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\LaboDialogV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

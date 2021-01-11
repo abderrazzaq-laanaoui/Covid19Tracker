@@ -3,11 +3,15 @@
 // Created: 03 December 2020 13:36:59
 // Purpose: Definition of Class CentreDeVaccination
 
+using System.Collections.Generic;
+
 namespace Covid19Track
 {
     // date de vaccination est calculable (DURÉE DE PROTECTION ) => Last record vaccinee
     public class CentreDeVaccination : Etablissement
     {
+        public static List<CentreDeVaccination> centres { get;  set; }
+
         public string nom
         {
             get => _nom;

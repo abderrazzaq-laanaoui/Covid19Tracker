@@ -13,8 +13,6 @@ namespace GraphicInterface
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static List<Laboratoire> laboratoires { get; private set; }
-        public static List<CentreDeVaccination> centres { get; private set; }
 
         public MainWindow()
         {
@@ -59,8 +57,8 @@ namespace GraphicInterface
         {
            
             Citoyen.citoyens = CitoyenDAO.FindAll();
-            laboratoires = EtablisementDAO.FindAll(1).OfType<Laboratoire>().ToList();
-            centres = EtablisementDAO.FindAll(2).OfType<CentreDeVaccination>().ToList();
+            Laboratoire.laboratoires = EtablisementDAO.FindAll(1).OfType<Laboratoire>().ToList();
+            CentreDeVaccination.centres = EtablisementDAO.FindAll(2).OfType<CentreDeVaccination>().ToList();
 
         }
 
@@ -99,6 +97,9 @@ namespace GraphicInterface
             DataContext = new EtablisementVM();
         }
 
-        
+        private void View_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TgBtn.IsChecked = false;
+        }
     }
 }

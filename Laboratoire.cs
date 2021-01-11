@@ -4,11 +4,14 @@
 // Purpose: Definition of Class Laboratoire
 
 using System;
+using System.Collections.Generic;
 
 namespace Covid19Track
 {
     public class Laboratoire : Etablissement
     {
+        public static List<Laboratoire> laboratoires { get; set; }
+
         public string nom
         {
             get => _nom;
