@@ -35,7 +35,7 @@ namespace Covid19Track.DataManipulation
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;            
             }
 
         }

@@ -67,17 +67,17 @@
     <Compile Include="ViewModeles\EtablisementVM.cs" />
     <Compile Include="ViewModeles\HomeVM.cs" />
     <Compile Include="ViewModeles\StatestiquesVM.cs" />
-    <Compile Include="Views\Citoyen.xaml.cs">
-      <DependentUpon>Citoyen.xaml</DependentUpon>
+    <Compile Include="Views\CitoyenV.xaml.cs">
+      <DependentUpon>CitoyenV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Etablisement.xaml.cs">
-      <DependentUpon>Etablisement.xaml</DependentUpon>
+    <Compile Include="Views\EtablisementV.xaml.cs">
+      <DependentUpon>EtablisementV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Home.xaml.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+    <Compile Include="Views\HomeV.xaml.cs">
+      <DependentUpon>HomeV.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Statestiques.xaml.cs">
-      <DependentUpon>Statestiques.xaml</DependentUpon>
+    <Compile Include="Views\StatestiquesV.xaml.cs">
+      <DependentUpon>StatestiquesV.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -91,19 +91,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Citoyen.xaml">
+    <Page Include="Views\CitoyenV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Etablisement.xaml">
+    <Page Include="Views\EtablisementV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Home.xaml">
+    <Page Include="Views\HomeV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Statestiques.xaml">
+    <Page Include="Views\StatestiquesV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

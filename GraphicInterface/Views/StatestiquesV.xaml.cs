@@ -11,7 +11,7 @@ namespace GraphicInterface.Views
     /// <summary>
     /// Interaction logic for Statestiques.xaml
     /// </summary>
-    public partial class Statestiques : UserControl
+    public partial class StatestiquesV : UserControl
     {
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
@@ -20,7 +20,7 @@ namespace GraphicInterface.Views
         public SeriesCollection SeriesCollection2 { get; set; }
         public string[] Labels2 { get; set; }
         public Func<double, string> Formatter2 { get; set; }
-        public Statestiques()
+        public StatestiquesV()
         {
             InitializeComponent();
             SeriesCollection = new SeriesCollection

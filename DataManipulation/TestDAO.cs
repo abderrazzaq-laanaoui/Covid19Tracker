@@ -28,7 +28,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -61,7 +61,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {

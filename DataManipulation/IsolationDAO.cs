@@ -28,7 +28,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -56,11 +56,10 @@ namespace Covid19Track
                         citoyen.Isolations.Add(new Isolation(DateTime.Parse(row[0].ToString()), DateTime.Parse(row[1].ToString())) );
                     }
                 }
-
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {

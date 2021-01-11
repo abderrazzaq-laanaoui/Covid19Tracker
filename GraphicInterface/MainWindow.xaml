@@ -85,16 +85,16 @@
         </Style>
         <!--Views-->
         <DataTemplate x:Name="HomeViewTemplate" DataType="{x:Type viewmodles:HomeVM}">
-            <views:Home DataContext="{Binding}"/>
+            <views:HomeV DataContext="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Name="StatestiquesViewTemplate" DataType="{x:Type viewmodles:StatestiquesVM}">
-            <views:Statestiques DataContext="{Binding}"/>
+            <views:StatestiquesV DataContext="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Name="CitoyenViewTemplate" DataType="{x:Type viewmodles:CitoyenVM}">
-            <views:Citoyen DataContext="{Binding}"/>
+            <views:CitoyenV DataContext="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Name="EtablisementViewTemplate" DataType="{x:Type viewmodles:EtablisementVM}">
-            <views:Etablisement DataContext="{Binding}"/>
+            <views:EtablisementV DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
     

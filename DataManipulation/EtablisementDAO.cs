@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows;
 using static Covid19Track.DataManipulation.DBManager;
 
 namespace Covid19Track
@@ -22,7 +23,7 @@ namespace Covid19Track
                     Command.CommandText = "INSERT INTO `Etablisement` (`reference`, `nom`, `type`)" +
                     $" VALUES ('{((CentreDeVaccination)dto).reference.ToUpper()}', '{((CentreDeVaccination)dto).nom.ToUpper()}', '2')";
                 }
-                if (Connection.State != System.Data.ConnectionState.Open)
+                if (Connection.State != ConnectionState.Open)
                     Connection.Open();
                 Command.Connection = Connection;
                 Command.ExecuteNonQuery();
@@ -30,11 +31,11 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
-                if (Connection.State == System.Data.ConnectionState.Open)
+                if (Connection.State == ConnectionState.Open)
                     Connection.Close();
             }
             return dto;
@@ -46,7 +47,7 @@ namespace Covid19Track
             try
             {
                 reference = reference.Trim().ToUpper();
-                if (Cnx.State != System.Data.ConnectionState.Open)
+                if (Cnx.State != ConnectionState.Open)
                     Cnx.Open();
                 Command.CommandText = "SELECT COUNT(*) FROM `Etablisement` WHERE `type`='" + type + "' and `reference` = '" + reference + "'";
                 Command.Connection = Cnx;
@@ -57,7 +58,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -94,7 +95,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -140,7 +141,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -163,7 +164,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -195,7 +196,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {

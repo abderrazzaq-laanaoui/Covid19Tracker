@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GraphicInterface.Views.Citoyen"
+﻿<UserControl x:Class="GraphicInterface.Views.CitoyenV"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,16 +6,16 @@
              xmlns:local="clr-namespace:GraphicInterface.Views"
              mc:Ignorable="d" 
             d:DesignHeight="800" d:DesignWidth="1035">
-    <Grid >
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
-
-            <RowDefinition/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -24,44 +24,42 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <!--TITRE INFOS-->
+        <!-- TITRE INFOS -->
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Text="Informations Personelles" FontSize="30" HorizontalAlignment="Center"/>
         </Grid>
-        <!--CIN-->
+        <!-- CIN -->
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Margin="50,0,0,0" Text="C.I.N : " FontSize="20" VerticalAlignment="Center"/>
             <ComboBox IsEditable="True" VerticalAlignment="Center"
                   Width="250"
                   Height="25"
-                  IsTextSearchEnabled="False"
-                  x:Name="cb"
-                  ItemsSource="{Binding ItemList}"
-                  Text="{Binding SearchTextText}">
+                  IsTextSearchEnabled="True"
+                  x:Name="CINList"
+                  Text="Entrer CIN" SelectionChanged="CINList_SelectionChanged" >
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />
                     </ItemsPanelTemplate>
                 </ComboBox.ItemsPanel>
             </ComboBox>
-
         </Grid>
-        <!--NOM-->
+        <!-- NOM -->
         <Grid Grid.Row="2" Grid.Column="0" Margin="0,10,0,0">
             <TextBlock  Margin="30,0,0,0" Text="Nom : " FontSize="16"/>
             <TextBox x:Name="NomBox" FontSize="16" Height="25" VerticalAlignment="Bottom" Width="200" IsReadOnly="True" />
         </Grid>
-        <!--PRENOM-->
+        <!-- PRENOM -->
         <Grid Grid.Row="2" Grid.Column="1" Margin="0,10,0,0">
             <TextBlock  Margin="30,0,0,0" Text="Prenom : " FontSize="16"/>
-            <TextBox x:Name="PrenomBox" FontSize="16" Height="25" VerticalAlignment="Bottom" Width="200" IsReadOnly="True"/>
+            <TextBox x:Name="PrenomBox" FontSize="16" Height="25" VerticalAlignment="Bottom" Width="200" IsReadOnly="True" />
         </Grid>
-        <!--DDN-->
+        <!-- DDN -->
         <Grid Grid.Row="3" Grid.Column="0" Margin="0,10,0,0">
             <TextBlock  Margin="30,0,0,0" Text="Date De Naissance : " FontSize="16"/>
-            <DatePicker x:Name="DateBox" Text="" FontSize="14" Height="25" VerticalAlignment="Bottom" Width="200"  IsEnabled="False"/>
+            <DatePicker x:Name="DateBox" Text="" FontSize="14" Height="25" VerticalAlignment="Bottom" Width="200"  IsEnabled="False" />
         </Grid>
-        <!--REGION-->
+        <!-- REGION -->
         <Grid Grid.Row="3" Grid.Column="1" Margin="0,10,0,0">
             <TextBlock  Margin="30,0,0,0" Text="Region : " FontSize="16"/>
             <ComboBox Name="RegionBox" Width="200"  Height="25" VerticalAlignment="Bottom" IsEnabled="False" >
@@ -79,12 +77,12 @@
                 <ComboBoxItem Content="Dakhla_Oued Eddahab" FontSize="14"/>
             </ComboBox>
         </Grid>
-        <!--Doses-->
+        <!-- Doses -->
         <Grid Grid.Row="4" Grid.Column="0" Margin="0,10,0,0">
             <TextBlock  Margin="30,0,0,0" Text="Doses Injectées : " FontSize="16"/>
             <TextBox Name="DosesBox" MaxLength="1" PreviewTextInput="NumberValidationTextBox" Width="200"  Height="25" VerticalAlignment="Bottom" IsReadOnly="True"/>
         </Grid>
-        <!--ETAT-->
+        <!-- ETAT -->
         <Grid Grid.Row="4" Grid.Column="1" Margin="0,10,0,0">
             <TextBlock  Margin="30,0,0,0" Text="Etat : " FontSize="16"/>
             <ComboBox Name="EtatBox" Width="200"  Height="25" VerticalAlignment="Bottom" IsEnabled="False" >
@@ -100,9 +98,7 @@
         <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" >
             <TextBlock Text=" OPERATIONS " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-            <Image Source="{Binding QRImg}" Width="210" Height="210" />
-        </Grid>
+        <!-- OPERATIONS BUTTONS -->
         <Grid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -113,32 +109,41 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" >
-                <Button Height="40" Width="200" />
+                <Button x:Name="O1Btn"  Height="40" Width="200" Content="Injecté une dose de Vaccine" IsEnabled="False"/>
             </Grid>
             <Grid Grid.Row="0" Grid.Column="1" >
-                <Button Height="40" Width="200" />
+                <Button x:Name="O2Btn"   Height="40" Width="200" Content="Se faire Isoler" IsEnabled="False" />
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" >
-                <Button Height="40" Width="200" />
+            <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" >
+                <Button x:Name="O3Btn"   Height="40" Width="200" Content="Rencontrer avec autre Citoyen"  IsEnabled="False"/>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="1" >
-                <Button Height="40" Width="200" />
+            <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" >
+                <Button x:Name="O4Btn"  Height="40" Width="200" Content="Faire un Test PCR" IsEnabled="False"/>
             </Grid>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="2" Height="35" TextElement.FontSize="20" Grid.ColumnSpan="2">
+        <!-- TITRE QR CODE -->
+        <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" >
+            <TextBlock Text=" QR CODE " FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        </Grid>
+        <!-- QR CODE -->
+        <Grid Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Border BorderThickness="10" BorderBrush="White">
+                <Image Source="{Binding QRImg}" Width="210" Height="210" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
+            <TextBlock Text="Enregistrements" FontSize="30" HorizontalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2" Height="35"  VerticalAlignment="Bottom" TextElement.FontSize="20" Grid.ColumnSpan="2">
             <ComboBox  Width="200" >
-                <ComboBoxItem Content="Records" FontSize="20" IsSelected="True"/>
                 <ComboBoxItem Content="Testes" FontSize="20"/>
+                <ComboBoxItem Content="Records" FontSize="20" IsSelected="True"/>
                 <ComboBoxItem Content="Rencontres" FontSize="20" />
                 <ComboBoxItem Content="Isolations" FontSize="20" />
             </ComboBox>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="2" Height="35" TextElement.FontSize="20" Grid.ColumnSpan="2">
-            <ComboBox  Width="200" >
-                <ComboBoxItem Content="Records" FontSize="20" IsSelected="True"/>
-                <ComboBoxItem Content="Testes" FontSize="20"/>
-                <ComboBoxItem Content="Rencontres" FontSize="20" />
-            </ComboBox>
+        <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6">
+            <DataGrid ItemsSource="{Binding Table}"></DataGrid>
         </Grid>
 
     </Grid>

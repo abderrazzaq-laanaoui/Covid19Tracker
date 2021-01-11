@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GraphicInterface.Views
 {
     /// <summary>
-    /// Interaction logic for Home.xaml
+    /// Interaction logic for Etablisement.xaml
     /// </summary>
-    public partial class Home : UserControl
+    public partial class EtablisementV : UserControl
     {
-        public Home()
+        public EtablisementV()
         {
             InitializeComponent();
         }

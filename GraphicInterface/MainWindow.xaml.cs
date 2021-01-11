@@ -1,5 +1,6 @@
 ﻿using Covid19Track;
 using GraphicInterface.ViewModeles;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -22,7 +23,14 @@ namespace GraphicInterface
         }
         private void Window_ContentRendered(object sender, System.EventArgs e)
         {
-            LoadData();
+            try
+            {
+                LoadData();
+            }catch(Exception ex)
+            {
+                MessageBox.Show($"ERREUR: {ex.Message} !");
+            }
+                
         }
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {

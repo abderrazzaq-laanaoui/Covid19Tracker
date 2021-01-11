@@ -3,6 +3,7 @@ using Covid19Track;
 using static Covid19Track.DataManipulation.DBManager;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows;
 
 namespace Covid19Track
 {
@@ -22,7 +23,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -49,7 +50,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -79,7 +80,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -119,7 +120,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -142,7 +143,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {
@@ -156,7 +157,7 @@ namespace Covid19Track
         {
             try
             {
-                if (Connection.State != System.Data.ConnectionState.Open)
+                if (Connection.State != ConnectionState.Open)
                     Connection.Open();
                 Command.CommandText = $"UPDATE Citoyen SET prenom = '{dto.prenom.ToUpper()}', nom = '{dto.nom.ToUpper()}'," +
                     $" date = (STR_TO_DATE('{dto.dateDeNaissance.ToShortDateString()}','%d/%m/%Y')), region = {(int) dto.Region}" +
@@ -166,7 +167,7 @@ namespace Covid19Track
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             finally
             {

@@ -160,7 +160,7 @@ namespace Covid19Track
                 case Etats.Inconnu:
                     return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est d'etat Inconnu";
                 case Etats.Saint:
-                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + "  est Saint";
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + "  est Sain";
                 case Etats.Soupconne:
                     return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est Soupçonné d'etre infercté";
                 case Etats.Infecte:
