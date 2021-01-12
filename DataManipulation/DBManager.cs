@@ -30,8 +30,6 @@ namespace Covid19Track.DataManipulation
                 Command.Connection = Connection;
                 Adapter.SelectCommand = Command;
                 dataTable = new DataTable();
-
-
             }
             catch (Exception ex)
             {

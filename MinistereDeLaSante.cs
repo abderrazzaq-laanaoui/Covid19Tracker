@@ -3,10 +3,8 @@
 // Created: 03 December 2020 00:43:24
 // Purpose: Definition of Class MinistereDeLaSante
 
-
 using System.Linq;
 using System;
-using System.Collections.Generic;
 
 namespace Covid19Track
 {
@@ -22,7 +20,6 @@ namespace Covid19Track
             {
                 checkContact(citoyen);
             }
-
         }
 
         private static void checkContact(Citoyen citoyen)

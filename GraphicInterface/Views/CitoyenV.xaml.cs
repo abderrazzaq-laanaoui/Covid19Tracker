@@ -27,7 +27,7 @@ namespace GraphicInterface.Views
             InitializeComponent();
             CINList.ItemsSource = Citoyen.citoyens.Select(c => c.CIN).ToList();
         }
-
+        
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -105,7 +105,7 @@ namespace GraphicInterface.Views
 
         }
 
-       
+        
         private ImageSource Bitmap2imageSource(Bitmap bitmap)
         {
             using (MemoryStream memory = new MemoryStream())
@@ -152,6 +152,9 @@ namespace GraphicInterface.Views
 
         private void O2Btn_Click(object sender, RoutedEventArgs e)
         {
+            var tmpC = Citoyen.citoyens.First(c => c.CIN == CINList.SelectedItem.ToString());
+            tmpC.SeConfiner();
+            MessageBox.Show("Le Confinement à été commancer , Il sera terminer dans 10 jours");
 
         }
 

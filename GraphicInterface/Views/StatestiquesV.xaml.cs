@@ -5,6 +5,8 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using Covid19Track;
 using System.Linq;
+using System.Collections.Generic;
+using Covid19Track.DataManipulation;
 
 namespace GraphicInterface.Views
 {
@@ -14,7 +16,7 @@ namespace GraphicInterface.Views
     public partial class StatestiquesV : UserControl
     {
         public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
+        public List<string> Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
         //---
         public SeriesCollection SeriesCollection2 { get; set; }
@@ -23,33 +25,47 @@ namespace GraphicInterface.Views
         public StatestiquesV()
         {
             InitializeComponent();
+            var recordes = RecordDAO.SelectAll();
+            Labels = recordes.Select(r => r.date.ToShortDateString()).Distinct().ToList();
+            ChartValues<int> inf = new ChartValues<int>(), vac = new ChartValues<int>(), sai = new ChartValues<int>();
+            for (int i = 0; i < Labels.Count; i++)
+            {
+                 inf.Add(recordes.Where(r => r.date.ToShortDateString() == Labels[i]
+                                        && r.etat == Etats.Infecte).Count());
+                 vac.Add(recordes.Where(r => r.date.ToShortDateString() == Labels[i]
+                                        && r.etat == Etats.Vaccine).Count());
+                 sai.Add(recordes.Where(r => r.date.ToShortDateString() == Labels[i]
+                                        && r.etat == Etats.Saint).Count());
+;
+            }
             SeriesCollection = new SeriesCollection
             {
+
                 new LineSeries
                 {
-                    Title = "Series 1",
-                    Values = new ChartValues<double> { 4, 6, 5, 2 ,4 },
+                    Title = "\nCas\nInfectés\n",
+                    Values = inf,
                     PointGeometry = DefaultGeometries.Diamond,
                     PointGeometrySize = 10
                 },
                 new LineSeries
                 {
-                    Title = "Series 2",
-                    Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
+                    Title = "\nCas\nGuéris\n",
+                    Values = sai,
                     PointGeometry = DefaultGeometries.Square,
                     PointGeometrySize = 10
 
                 },
                 new LineSeries
                 {
-                    Title = "Series 3",
-                    Values = new ChartValues<double> { 4,2,7,2,7 },
+                    Title = "\nCas\nVaccinés\n",
+                    Values = vac,
                     PointGeometry = DefaultGeometries.Triangle,
                     PointGeometrySize = 10
                 }
             };
 
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
+            
 
             //________
             RegionsdData(out int[] InfectedData, out int[] GueriData);

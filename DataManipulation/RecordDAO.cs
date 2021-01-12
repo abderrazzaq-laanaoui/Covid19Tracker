@@ -11,7 +11,7 @@ using static Covid19Track.DataManipulation.DBManager;
 
 namespace Covid19Track
 {
-    class RecordDAO
+    public class RecordDAO
     {
         public static void Create(string CIN, Etats etat, DateTime date)
         {
@@ -68,5 +68,37 @@ namespace Covid19Track
             }
         }
 
+        public static List<Record> SelectAll()
+        {
+            var list = new List<Record>();
+            try
+            {
+                Command.CommandText = $"SELECT  `date`, `etat` FROM `Record` order by date;";
+                if (Connection.State != ConnectionState.Open)
+                    Connection.Open();
+                Command.Connection = Connection;
+                using (var reader = Command.ExecuteReader())
+                {
+                    var dt = new DataTable();
+                    dt.Load(reader);
+                    for (int j = 0; j < dt.Rows.Count; j++)
+                    {
+                        var row = dt.Rows[j];
+                        list.Add(new Record(DateTime.Parse(row[0].ToString()), (Etats)int.Parse(row[1].ToString())));
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (Connection.State == ConnectionState.Open)
+                    Connection.Close();
+            }
+            return list;
+        }
     }
 }

@@ -20,7 +20,8 @@ namespace Covid19Track
                 _nom = value;
                 EtablisementDAO.Update(this, 1);
             }
-        } public string reference
+        } 
+        public string reference
         {
             get => _reference;
         }
@@ -45,8 +46,23 @@ namespace Covid19Track
         {
             Random random = new Random();
             var tmp = random.NextDouble();
-            //Probalité de positivité : 10%
-            bool resultat = tmp >= 0.9;
+            bool resultat;
+            if (citoyen.Etat == Etats.Vaccine)
+                //Probalité de positivité : 0%
+                resultat = tmp >= 0;
+            if (citoyen.Etat == Etats.Saint)
+                //Probalité de positivité : 10%
+                resultat = tmp >= 0.9;
+            if (citoyen.Etat == Etats.Soupconne)
+                //Probalité de positivité : 30%
+                resultat = tmp >= 0.7;
+            if (citoyen.Etat == Etats.Infecte)
+                //Probalité de positivité : 70%
+                resultat = tmp >= 0.3;
+            else
+                //Probalité de positivité : 50%
+                resultat = tmp >= 0.5;
+
             EnvoyerDonnees(citoyen, resultat);
             //Sauvgarder le test
             Test.AddTest(citoyen,this.reference,resultat);
@@ -62,7 +78,10 @@ namespace Covid19Track
             }
             else
             {
-                MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Saint);
+                if (citoyen.Etat != Etats.Vaccine) 
+                    MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Saint);
+
+
             }
 
         }

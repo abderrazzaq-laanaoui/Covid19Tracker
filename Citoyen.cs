@@ -81,7 +81,6 @@ namespace Covid19Track
         public List<Isolation> Isolations { get; set; }
         public List<Rencontre> Rencontres { get; set; }
 
-
         /* ---------  Constructor -------------- */
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Regions region)
         {
@@ -103,6 +102,7 @@ namespace Covid19Track
             if (!CitoyenDAO.Excist(cin))
             {
                 CitoyenDAO.Create(this);
+                Record.AddRecord(this, DateTime.Now);
             }
 
         }
@@ -127,6 +127,7 @@ namespace Covid19Track
             if (!CitoyenDAO.Excist(cin))
             {
                 CitoyenDAO.Create(this);
+                Record.AddRecord(this, DateTime.Now);
             }
         }
         public Citoyen(string cin, string nom, string prenom, string dateDeNaissance, Regions region,Etats etat, byte doses)
@@ -150,6 +151,8 @@ namespace Covid19Track
             if (!CitoyenDAO.Excist(cin))
             {
                 CitoyenDAO.Create(this);
+                Record.AddRecord(this, DateTime.Now);
+
             }
 
         }
@@ -189,7 +192,6 @@ namespace Covid19Track
                 checkForTime.Enabled = true;
             }
         }
-
         private void EndConfinement(object sender, ElapsedEventArgs e)
         {
             MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Saint);
