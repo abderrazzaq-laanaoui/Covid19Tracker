@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Covid19Track;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace GraphicInterface.Views
         public EtablisementV()
         {
             InitializeComponent();
+
+            Centres.ItemsSource = CentreDeVaccination.centres;
+            Labos.ItemsSource = Laboratoire.laboratoires;
         }
     }
 }

@@ -129,19 +129,22 @@
         <Grid Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                 <Image x:Name="QRImage"  Width="210" Height="210" />
         </Grid>
+        <!--PARTE 2-->
         <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
             <TextBlock Text="Enregistrements" FontSize="30" HorizontalAlignment="Center"/>
         </Grid>
+        <!--COBMOBOX-->
         <Grid Grid.Row="1" Grid.Column="2" Height="35"  VerticalAlignment="Bottom" TextElement.FontSize="20" Grid.ColumnSpan="2">
-            <ComboBox  Width="200" >
+            <ComboBox Name="DataBox" Width="200" SelectionChanged="ComboBox_SelectionChanged"  IsEnabled="False">
+                <ComboBoxItem Content="Records" FontSize="20"/>
                 <ComboBoxItem Content="Testes" FontSize="20"/>
-                <ComboBoxItem Content="Records" FontSize="20" IsSelected="True"/>
                 <ComboBoxItem Content="Rencontres" FontSize="20" />
                 <ComboBoxItem Content="Isolations" FontSize="20" />
             </ComboBox>
         </Grid>
-        <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6">
-            <DataGrid ItemsSource="{Binding Table}"></DataGrid>
+        <!--DATAVIEW-->
+        <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6" Width="350" >
+            <DataGrid x:Name="DataViewer" ColumnWidth="*"  MinColumnWidth="75"  ColumnHeaderHeight="30"  Height="500" Background="White" FontSize="16" VerticalAlignment="Top" AutoGeneratingColumn="DataViewer_AutoGeneratingColumn" ></DataGrid>
         </Grid>
 
     </Grid>

@@ -12,12 +12,12 @@ namespace Covid19Track
     {
         public static void ChangerEtatCitoyen(Citoyen citoyen, Etats etat)
         {
+
+            citoyen.Etat = etat;
             Record.AddRecord(citoyen, DateTime.Now);
 
-            var OldEtat = citoyen.Etat;
-            citoyen.Etat = etat;
 
-            if (etat == Etats.Infecte || OldEtat == Etats.Infecte)
+            if (etat == Etats.Infecte )
             {
                 checkContact(citoyen);
             }

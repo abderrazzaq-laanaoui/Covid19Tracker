@@ -23,12 +23,14 @@ namespace GraphicInterface.Views
         public SeriesCollection SeriesCollection2 { get; set; }
         public string[] Labels2 { get; set; }
         public Func<double, string> Formatter2 { get; set; }
+        List<Record> recordes; 
         public StatestiquesV()
         {
             InitializeComponent();
-            var recordes = RecordDAO.SelectAll();
+            recordes = Record.GetList();
             Labels = recordes.Select(r => r.date.ToShortDateString()).Distinct().ToList();
             ChartValues<int> inf = new ChartValues<int>(), vac = new ChartValues<int>(), sai = new ChartValues<int>();
+            //get data
             for (int i = 0; i < Labels.Count; i++)
             {
                 inf.Add(recordes.Where(r => r.date.ToShortDateString() == Labels[i]
@@ -103,6 +105,7 @@ namespace GraphicInterface.Views
             {
                 RegionsInfectedData[i] = 0;
                 RegionsGueriData[i] = 0;
+                // statestiques based on records
                 for (int j = 0; j < Citoyen.citoyens.Count; j++)
                 {
                     var tmpC = Citoyen.citoyens[j];
@@ -111,8 +114,9 @@ namespace GraphicInterface.Views
                         //I
                         RegionsInfectedData[i] += tmpC.Records.Where(r => r.etat == Etats.Infecte).Count();
 
+
                         //G
-                        for (int k = 0; k < tmpC.Records.Count - 1; k++)
+                        for (int k= 0; k < tmpC.Records.Count - 1; k++)
                         {
                             if (tmpC.Records[k].etat == Etats.Infecte && tmpC.Records[k + 1].etat == Etats.Sain)
                             {
@@ -130,5 +134,6 @@ namespace GraphicInterface.Views
             Application.Current.MainWindow.DataContext = new TodayVM();
 
         }
+        
     }
 }

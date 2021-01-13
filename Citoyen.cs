@@ -205,7 +205,7 @@ namespace Covid19Track
             if(this.etat == Etats.Infecte && citoyen.etat != Etats.Infecte && citoyen.etat != Etats.Decede && citoyen.etat != Etats.Vaccine)
             {
                 MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Soupconne);
-            }else if((citoyen.etat == Etats.Infecte && this.etat != Etats.Infecte && this.etat != Etats.Decede && this.etat != Etats.Vaccine){
+            }else if((citoyen.etat == Etats.Infecte && this.etat != Etats.Infecte && this.etat != Etats.Decede && this.etat != Etats.Vaccine)){
                 MinistereDeLaSante.ChangerEtatCitoyen(this, Etats.Soupconne);
             }
             Rencontre.AddRencontre(this, citoyen);

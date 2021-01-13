@@ -4,11 +4,19 @@
 // Purpose: Definition of Class Record
 
 using System;
+using System.Collections.Generic;
 
 namespace Covid19Track
 {
     public class Record
     {
+        private static List<Record> records;
+        public static List<Record> GetList()
+        {
+            if (records == null)
+                records = RecordDAO.SelectAll();
+            return records;
+        }
         public DateTime date { get; }
 
         public Etats etat { get; }
