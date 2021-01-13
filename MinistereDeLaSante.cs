@@ -12,9 +12,10 @@ namespace Covid19Track
     {
         public static void ChangerEtatCitoyen(Citoyen citoyen, Etats etat)
         {
+            Record.AddRecord(citoyen, DateTime.Now);
+
             var OldEtat = citoyen.Etat;
             citoyen.Etat = etat;
-            Record.AddRecord(citoyen, DateTime.Now);
 
             if (etat == Etats.Infecte || OldEtat == Etats.Infecte)
             {
@@ -28,7 +29,7 @@ namespace Covid19Track
             foreach (Rencontre rencontre in citoyen.Rencontres.Where(r => r.date >= DateTime.Now.AddDays(-7)))                                                 
             {
                 var cit = Citoyen.citoyens.Find(c => c.CIN.Equals(rencontre.citoyen));
-                if(cit.Etat == Etats.Inconnu || cit.Etat == Etats.Saint)
+                if(cit.Etat == Etats.Inconnu || cit.Etat == Etats.Sain)
                     cit.Etat = Etats.Soupconne;
             }
         }

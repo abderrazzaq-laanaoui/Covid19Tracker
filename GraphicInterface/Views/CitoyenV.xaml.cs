@@ -87,7 +87,7 @@ namespace GraphicInterface.Views
                 color = Color.Red;
             else if (citoyen.Etat == Etats.Vaccine)
                 color = Color.Green;
-            else if (citoyen.Etat == Etats.Saint)
+            else if (citoyen.Etat == Etats.Sain)
                 color = Color.Lime;
             else if (citoyen.Etat == Etats.Soupconne)
                 color = Color.Orange;

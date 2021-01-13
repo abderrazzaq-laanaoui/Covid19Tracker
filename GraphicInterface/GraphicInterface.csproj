@@ -74,6 +74,7 @@
     <Compile Include="ViewModeles\Dialog\CentreDialogVM.cs" />
     <Compile Include="ViewModeles\Dialog\LaboDialogVM.cs" />
     <Compile Include="ViewModeles\StatestiquesVM.cs" />
+    <Compile Include="ViewModeles\TodayVM.cs" />
     <Compile Include="Views\CitoyenV.xaml.cs">
       <DependentUpon>CitoyenV.xaml</DependentUpon>
     </Compile>
@@ -94,6 +95,9 @@
     </Compile>
     <Compile Include="Views\StatestiquesV.xaml.cs">
       <DependentUpon>StatestiquesV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TodayV.xaml.cs">
+      <DependentUpon>TodayV.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StatestiquesV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TodayV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

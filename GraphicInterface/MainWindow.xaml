@@ -96,6 +96,9 @@
         <DataTemplate x:Name="EtablisementViewTemplate" DataType="{x:Type viewmodles:EtablisementVM}">
             <views:EtablisementV DataContext="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Name="TodayViewTemplate" DataType="{x:Type viewmodles:TodayVM}">
+            <views:TodayV DataContext="{Binding}"/>
+        </DataTemplate>
     </Window.Resources>
     
     <Grid>

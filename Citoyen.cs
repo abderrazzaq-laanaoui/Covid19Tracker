@@ -16,7 +16,7 @@ namespace Covid19Track
     public enum Etats
     {
         Inconnu = 0,
-        Saint,
+        Sain,
         Soupconne,
         Infecte,
         Vaccine,
@@ -165,7 +165,7 @@ namespace Covid19Track
             {
                 case Etats.Inconnu:
                     return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est d'etat Inconnu";
-                case Etats.Saint:
+                case Etats.Sain:
                     return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + "  est Sain";
                 case Etats.Soupconne:
                     return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est Soupçonné d'etre infercté";
@@ -194,13 +194,20 @@ namespace Covid19Track
         }
         private void EndConfinement(object sender, ElapsedEventArgs e)
         {
-            MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Saint);
+            MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Sain);
             Isolation.AddConfinement(this, e.SignalTime, DateTime.Now);
         }
 
         //les operations a effectuer si un citoyen infecté rencontre un autre citoyen
         public void Contacter(Citoyen citoyen)
         {
+            // si l'un des deux est infecté
+            if(this.etat == Etats.Infecte && citoyen.etat != Etats.Infecte && citoyen.etat != Etats.Decede && citoyen.etat != Etats.Vaccine)
+            {
+                MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Soupconne);
+            }else if((citoyen.etat == Etats.Infecte && this.etat != Etats.Infecte && this.etat != Etats.Decede && this.etat != Etats.Vaccine){
+                MinistereDeLaSante.ChangerEtatCitoyen(this, Etats.Soupconne);
+            }
             Rencontre.AddRencontre(this, citoyen);
         }
 

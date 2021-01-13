@@ -50,7 +50,7 @@ namespace Covid19Track
             if (citoyen.Etat == Etats.Vaccine)
                 //Probalité de positivité : 0%
                 resultat = tmp >= 0;
-            if (citoyen.Etat == Etats.Saint)
+            if (citoyen.Etat == Etats.Sain)
                 //Probalité de positivité : 10%
                 resultat = tmp >= 0.9;
             if (citoyen.Etat == Etats.Soupconne)
@@ -62,7 +62,7 @@ namespace Covid19Track
             else
                 //Probalité de positivité : 50%
                 resultat = tmp >= 0.5;
-
+            resultat = false;
             EnvoyerDonnees(citoyen, resultat);
             //Sauvgarder le test
             Test.AddTest(citoyen,this.reference,resultat);
@@ -74,12 +74,13 @@ namespace Covid19Track
         {
             if (resultat)
             {
-                MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Infecte);
+                if(citoyen.Etat != Etats.Decede)
+                    MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Infecte);
             }
             else
             {
-                if (citoyen.Etat != Etats.Vaccine) 
-                    MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Saint);
+                if (citoyen.Etat != Etats.Vaccine && citoyen.Etat != Etats.Decede) 
+                    MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Sain);
 
 
             }
