@@ -40,7 +40,7 @@ namespace Covid19Track
             }
             else
             {
-                MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Saint);
+                MinistereDeLaSante.ChangerEtatCitoyen(citoyen, Etats.Sain);
             }
 
         }

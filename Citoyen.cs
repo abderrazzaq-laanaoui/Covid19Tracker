@@ -15,7 +15,7 @@ namespace Covid19Track
     public enum Etats
     {
         Inconnu = 0,
-        Saint,
+        Sain,
         Soupconne,
         Infecte,
         Vaccine,
@@ -112,8 +112,8 @@ namespace Covid19Track
             {
                 case Etats.Inconnu:
                     return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est d'etat Inconnu";
-                case Etats.Saint:
-                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + "  est Saint";
+                case Etats.Sain:
+                    return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + "  est Sain";
                 case Etats.Soupconne:
                     return "Citoyen " + prenom + " " + nom + " avec CIN: " + CIN + " est Soupçonné d'etre infercté";
                 case Etats.Infecte:
@@ -142,7 +142,7 @@ namespace Covid19Track
 
         private void EndConfinement(object sender, ElapsedEventArgs e)
         {
-            MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Saint);
+            MinistereDeLaSante.ChangerEtatCitoyen((Citoyen)sender, Etats.Sain);
             this.Isolations.Add(new Isolation(e.SignalTime,DateTime.Now));
         }
 
