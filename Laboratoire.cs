@@ -62,8 +62,7 @@ namespace Covid19Track
             else
                 //Probalité de positivité : 50%
                 resultat = tmp >= 0.5;
-            // TODO : DELETE THE LINE
-            resultat = false;
+
             EnvoyerDonnees(citoyen, resultat);
             //Sauvgarder le test
             Test.AddTest(citoyen,this.reference,resultat);

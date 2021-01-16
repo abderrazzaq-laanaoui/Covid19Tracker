@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GraphicInterface.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1035">
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,7 +20,7 @@
             <TextBlock Grid.Row="0" Text="LES LABORATOIRES" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <DataGrid Width="400" Grid.Row="1" x:Name="Labos" ColumnWidth="*"
                       MinColumnWidth="75"  ColumnHeaderHeight="30"  Height="650" Margin="0,20,0,0"
-                      Background="White" FontSize="16" VerticalAlignment="Top"  >
+                      Background="White" FontSize="16" VerticalAlignment="Top" IsReadOnly="True"  CanUserAddRows="True" >
                
             </DataGrid>
 
@@ -33,7 +33,7 @@
             <TextBlock Grid.Row="0" Text="LES CENTRES DE VACCINATION" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
             <DataGrid Width="400" Grid.Row="1" x:Name="Centres" ColumnWidth="*"
                       MinColumnWidth="75"  ColumnHeaderHeight="30"  Height="650" Margin="0,20,0,0"
-                      Background="White" FontSize="16" VerticalAlignment="Top"  >
+                      Background="White" FontSize="16" VerticalAlignment="Top" CanUserAddRows="True" IsReadOnly="true" >
                
             </DataGrid>
 

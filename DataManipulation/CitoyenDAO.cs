@@ -41,7 +41,7 @@ namespace Covid19Track
                 cin = cin.Trim().ToUpper();
                 if (Cnx.State != System.Data.ConnectionState.Open)
                     Cnx.Open();
-                Command.CommandText = "SELECT COUNT(*) FROM `Citoyen` WHERE `cin`='" + cin + "'";
+                Command.CommandText = "SELECT COUNT(*) FROM `citoyen` WHERE `cin`='" + cin + "'";
                 Command.Connection = Cnx;
                 int R = Convert.ToInt32(Command.ExecuteScalar());
                 res = R != 0;
@@ -70,7 +70,7 @@ namespace Covid19Track
                 cin = cin.Trim().ToUpper();
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = "SELECT * FROM `Citoyen` WHERE `cin`='" + cin + "'";
+                Command.CommandText = "SELECT * FROM `citoyen` WHERE `cin`='" + cin + "'";
                 Command.Connection = Connection;
                 Result = Command.ExecuteReader();
 
@@ -99,7 +99,7 @@ namespace Covid19Track
             {
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = "SELECT  * FROM `Citoyen`";
+                Command.CommandText = "SELECT  * FROM `citoyen`";
                 Command.Connection = Connection;
                 using (var reader = Command.ExecuteReader())
                 {
@@ -137,7 +137,7 @@ namespace Covid19Track
                 cin = cin.Trim().ToUpper();
                 if (Connection.State != System.Data.ConnectionState.Open)
                     Connection.Open();
-                Command.CommandText = "DELETE FROM `Citoyen` WHERE `cin`='" + cin + "'";
+                Command.CommandText = "DELETE FROM `citoyen` WHERE `cin`='" + cin + "'";
                 Command.Connection = Connection;
                 int i = Command.ExecuteNonQuery();
             }

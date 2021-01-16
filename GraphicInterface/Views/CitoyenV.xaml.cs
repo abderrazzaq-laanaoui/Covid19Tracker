@@ -63,7 +63,6 @@ namespace GraphicInterface.Views
         }
         private void RemoveData()
         {
-
             DataBox.IsEnabled = false;
             NomBox.Text = string.Empty;
             PrenomBox.Text = string.Empty;
@@ -83,7 +82,6 @@ namespace GraphicInterface.Views
         private void SetQRCode(Citoyen citoyen)
         {
             Color color;
-            // Deciding the color
             if (citoyen.Etat == Etats.Infecte)
                 color = Color.Red;
             else if (citoyen.Etat == Etats.Vaccine)
@@ -207,9 +205,7 @@ namespace GraphicInterface.Views
 
             if (e.PropertyType == typeof(System.DateTime))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
-            //else if(e.PropertyType == typeof(bool)) { 
-            //}
-            //    (e.Column as DataGridTextColumn).Binding.StringFormat
+
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

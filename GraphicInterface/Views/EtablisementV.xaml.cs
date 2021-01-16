@@ -27,6 +27,7 @@ namespace GraphicInterface.Views
 
             Centres.ItemsSource = CentreDeVaccination.centres;
             Labos.ItemsSource = Laboratoire.laboratoires;
+            
         }
     }
 }

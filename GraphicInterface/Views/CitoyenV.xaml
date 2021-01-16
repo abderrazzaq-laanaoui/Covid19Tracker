@@ -144,7 +144,7 @@
         </Grid>
         <!--DATAVIEW-->
         <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="6" Width="350" >
-            <DataGrid x:Name="DataViewer" ColumnWidth="*"  MinColumnWidth="75"  ColumnHeaderHeight="30"  Height="500" Background="White" FontSize="16" VerticalAlignment="Top" AutoGeneratingColumn="DataViewer_AutoGeneratingColumn" ></DataGrid>
+            <DataGrid x:Name="DataViewer" ColumnWidth="*"  MinColumnWidth="75" IsReadOnly="True"  ColumnHeaderHeight="30"  Height="500" Background="White" FontSize="16" VerticalAlignment="Top" AutoGeneratingColumn="DataViewer_AutoGeneratingColumn" ></DataGrid>
         </Grid>
 
     </Grid>

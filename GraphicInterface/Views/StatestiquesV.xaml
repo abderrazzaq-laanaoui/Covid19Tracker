@@ -42,9 +42,9 @@
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </Grid>
-        <Grid HorizontalAlignment="Right" Grid.Row="0"  Margin="0,0,20,0">
+        <!--<Grid HorizontalAlignment="Right" Grid.Row="0"  Margin="0,0,20,0">
             <Button x:Name="TodayBtn" Content="Aujourd'hui" Height="35" Width="100" FontWeight="Bold" Click="TodayBtn_Click"/>
-        </Grid>
+        </Grid>-->
     </Grid>
 
 </UserControl>
