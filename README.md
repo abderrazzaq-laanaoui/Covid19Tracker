@@ -11,26 +11,26 @@ La réalisation de ce projet est répartie sur 5 étapes.
 #### Les etapes sont :
 
 ## 1. L'implementation de la Diagramme de Classes
-### Sous la branche : # [main](https://github.com/abderrazzaq-laanaoui/Covid19Track/tree/main)
+### Sous la branche : # [main](https://github.com/abderrazzaq-laanaoui/Covid19Tracker/tree/main)
 
 ![Diagramme de Classes](/assets/DC.png "Diagramme de Classes")
 
 ## 2. L'implementation de la Diagramme état transition
-### Sous la branche : # [main](https://github.com/abderrazzaq-laanaoui/Covid19Track/tree/main)
+### Sous la branche : # [main](https://github.com/abderrazzaq-laanaoui/Covid19Tracker/tree/main)
 
 ![Diagramme état transition](/assets/DET.png "Diagramme état transition")
 
 
 
 ## 3. L'introduction d'une interface console
-### Sous la branche : # [ConsoleInterface](https://github.com/abderrazzaq-laanaoui/Covid19Track/tree/ConsoleInterface)
+### Sous la branche : # [ConsoleInterface](https://github.com/abderrazzaq-laanaoui/Covid19Tracker/tree/ConsoleInterface)
 
 ![Interface console](/assets/Console.png "Interface console")
 
 
 
 ## 4. La Laison Avec Un Source De Données
-### Sous la branche : # [DataSource](https://github.com/abderrazzaq-laaanoui/Covid19Track/tree/DataSource)
+### Sous la branche : # [DataSource](https://github.com/abderrazzaq-laaanoui/Covid19Tracker/tree/DataSource)
 
 ![Schema de la base de données](/assets/schema.png "Schema de la base de données")
 
