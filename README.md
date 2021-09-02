@@ -35,5 +35,5 @@ La réalisation de ce projet est répartie sur 5 étapes.
 ![Schema de la base de données](/assets/schema.png "Schema de la base de données")
 
 
-## 5. L'introduction d'une interface console
+## 5. L'introduction d'une interface graphique
 ### Sous la branche : # [GraphicInterface]()
